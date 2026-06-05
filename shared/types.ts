@@ -24,6 +24,22 @@ export interface ProductPageSnapshot {
   schemaTypes: string[];
   visiblePrice?: string;
   visibleRating?: string;
+  bodyTextLength?: number;
+  scanEvidence?: ScanEvidence;
+}
+
+export interface ScanEvidence {
+  scannedAt: string;
+  titleSource: string;
+  descriptionSource: string;
+  priceSource?: string;
+  ratingSource?: string;
+  imageCount: number;
+  descriptionLength: number;
+  bodyTextLength: number;
+  foundFields: string[];
+  missingFields: string[];
+  textSources: string[];
 }
 
 export interface ScoreResult {

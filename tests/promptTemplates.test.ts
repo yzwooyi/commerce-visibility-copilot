@@ -38,4 +38,26 @@ describe("prompt templates", () => {
     expect(prompts.codexPrompt).toContain("Exact marketplace fields to update");
     expect(prompts.codexPrompt).toContain("Do not ask the seller to add JSON-LD schema");
   });
+
+  it("includes scan evidence so optimization is based on confirmed page data", () => {
+    const prompts = generateFixPrompts({
+      ...snapshot,
+      scanEvidence: {
+        scannedAt: "2026-06-05T00:00:00.000Z",
+        titleSource: "h1",
+        descriptionSource: "product detail selector",
+        imageCount: 6,
+        descriptionLength: 420,
+        bodyTextLength: 6200,
+        foundFields: ["title", "description/body text", "images"],
+        missingFields: ["buyer FAQ/questions", "rating/review signal"],
+        textSources: ["main", "section"]
+      }
+    });
+
+    expect(prompts.claudePrompt).toContain("Scan evidence:");
+    expect(prompts.claudePrompt).toContain("Found fields: title, description/body text, images");
+    expect(prompts.claudePrompt).toContain("Missing fields: buyer FAQ/questions, rating/review signal");
+    expect(prompts.codexPrompt).toContain("Description source: product detail selector");
+  });
 });

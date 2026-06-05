@@ -2,6 +2,7 @@ import { getPlatformProfile } from "./platformOptimization";
 import type { FixPrompts, ProductPageSnapshot } from "./types";
 
 function productData(snapshot: ProductPageSnapshot): string {
+  const evidence = snapshot.scanEvidence;
   return [
     `URL: ${snapshot.url || "Not provided"}`,
     `Platform: ${snapshot.platform}`,
@@ -14,7 +15,21 @@ function productData(snapshot: ProductPageSnapshot): string {
     `FAQ questions: ${snapshot.faqQuestions.join(" | ") || "Missing"}`,
     `Schema types: ${snapshot.schemaTypes.join(" | ") || "Missing"}`,
     `Visible price: ${snapshot.visiblePrice || "Missing"}`,
-    `Visible rating: ${snapshot.visibleRating || "Missing"}`
+    `Visible rating: ${snapshot.visibleRating || "Missing"}`,
+    evidence
+      ? [
+          "",
+          "Scan evidence:",
+          `- Title source: ${evidence.titleSource}`,
+          `- Description source: ${evidence.descriptionSource}`,
+          `- Description length: ${evidence.descriptionLength}`,
+          `- Body text length scanned: ${evidence.bodyTextLength}`,
+          `- Images found: ${evidence.imageCount}`,
+          `- Found fields: ${evidence.foundFields.join(", ") || "None"}`,
+          `- Missing fields: ${evidence.missingFields.join(", ") || "None"}`,
+          `- Text sources checked: ${evidence.textSources.join(", ") || "Not confirmed"}`
+        ].join("\n")
+      : "Scan evidence: Manual input or older scan; evidence not available."
   ].join("\n");
 }
 

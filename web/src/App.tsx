@@ -578,6 +578,26 @@ export default function App() {
               )}
             </div>
           </div>
+          {snapshot.scanEvidence && (
+            <div className="platform-panel evidence-panel">
+              <h3>Scan evidence</h3>
+              <div className="evidence-grid">
+                <span>
+                  Text <strong>{snapshot.scanEvidence.bodyTextLength.toLocaleString()}</strong>
+                </span>
+                <span>
+                  Description <strong>{snapshot.scanEvidence.descriptionLength.toLocaleString()}</strong>
+                </span>
+                <span>
+                  Images <strong>{snapshot.scanEvidence.imageCount}</strong>
+                </span>
+              </div>
+              <p>Found: {snapshot.scanEvidence.foundFields.join(", ") || "nothing reliable yet"}</p>
+              {snapshot.scanEvidence.missingFields.length > 0 && (
+                <p>Missing: {snapshot.scanEvidence.missingFields.join(", ")}</p>
+              )}
+            </div>
+          )}
           <div className="platform-panel">
             <h3>{platformProfile.label} optimization plan</h3>
             <p>{platformProfile.primaryGoal}</p>

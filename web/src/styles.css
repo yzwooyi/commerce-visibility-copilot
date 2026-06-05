@@ -406,6 +406,36 @@ button {
   line-height: 1.5;
 }
 
+.evidence-panel p {
+  margin: 9px 0 0;
+  color: #475569;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.evidence-grid span {
+  border: 1px solid rgba(109, 119, 145, 0.13);
+  border-radius: 14px;
+  padding: 8px;
+  background: rgba(255,255,255,0.8);
+  color: var(--hero-muted);
+  font-size: 11px;
+  line-height: 1.25;
+}
+
+.evidence-grid strong {
+  display: block;
+  margin-top: 3px;
+  color: var(--hero-ink);
+  font-size: 15px;
+}
+
 .app-shell {
   max-width: 1220px;
   margin: 0 auto;
