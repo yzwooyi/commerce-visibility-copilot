@@ -1,6 +1,6 @@
 # Version
 
-Current version: `v2026.06.05-01`
+Current version: `v2026.06.05-02`
 
 ## Notes
 
@@ -10,3 +10,5 @@ Current version: `v2026.06.05-01`
 - Platform-aware fixes for Shopee MY, Lazada MY, TikTok Shop MY, Shopify, WooCommerce, independent stores, and Amazon.
 - Beginner fix cards for Claude/Codex handoff.
 - Local customer scan dashboard using browser storage.
+- Ready-to-paste fix output blocks for marketplace sellers.
+- Before/after score delta and workflow status in saved scan dashboard.

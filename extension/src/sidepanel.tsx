@@ -2,6 +2,7 @@ import { Check, Clipboard, ExternalLink, RefreshCw, ScanLine, Sparkles, Wrench }
 import React, { useMemo, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { buildBeginnerFixCards } from "../../shared/fixCards";
+import { generateFixOutputPack } from "../../shared/fixOutput";
 import { generateFixPrompts } from "../../shared/promptTemplates";
 import { buildVisibilityReport } from "../../shared/report";
 import { loadSavedReports, saveReportSnapshot } from "../../shared/savedReports";
@@ -306,6 +307,7 @@ function App() {
 
   const report = useMemo(() => (snapshot ? buildVisibilityReport(snapshot) : null), [snapshot]);
   const prompts = useMemo(() => (snapshot ? generateFixPrompts(snapshot) : null), [snapshot]);
+  const fixOutputPack = useMemo(() => (snapshot ? generateFixOutputPack(snapshot) : null), [snapshot]);
   const platformProfile = useMemo(() => (snapshot ? getPlatformProfile(snapshot.platform) : null), [snapshot]);
   const checklist = useMemo(
     () =>
@@ -403,7 +405,7 @@ function App() {
       )}
       {copyStatus && <p className="status-message success">{copyStatus}</p>}
 
-      {report && prompts && (
+      {report && prompts && fixOutputPack && (
         <>
           <section className="section">
             <ScoreRow label="Can Google find it?" result={report.seo} />
@@ -452,6 +454,25 @@ function App() {
                     </button>
                   </article>
                 ))}
+            </div>
+          </section>
+
+          <section className="section fix-output-panel">
+            <h2>Ready-to-paste output</h2>
+            <p className="helper-copy">{fixOutputPack.summary}</p>
+            <div className="output-block-stack compact">
+              {fixOutputPack.blocks.slice(0, 3).map((block) => (
+                <article className="output-block" key={block.id}>
+                  <div className="fix-card-header">
+                    <strong>{block.label}</strong>
+                    <span>{block.pasteLocation}</span>
+                  </div>
+                  <button className="secondary-button" onClick={() => copyPrompt(block.label, block.content)}>
+                    <Clipboard size={16} />
+                    Copy {block.label}
+                  </button>
+                </article>
+              ))}
             </div>
           </section>
 

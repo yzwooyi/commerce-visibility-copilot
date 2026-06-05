@@ -69,6 +69,18 @@ export interface FixPrompts {
   codexPrompt: string;
 }
 
+export interface FixOutputBlock {
+  id: string;
+  label: string;
+  pasteLocation: string;
+  content: string;
+}
+
+export interface GeneratedFixPack {
+  summary: string;
+  blocks: FixOutputBlock[];
+}
+
 export interface OutputCheckResult {
   status: "ready_to_publish" | "needs_improvement";
   issues: string[];
@@ -85,6 +97,12 @@ export interface SavedReport {
     geo: number;
     aeo: number;
   };
+  scoreDelta?: {
+    seo: number;
+    geo: number;
+    aeo: number;
+  };
+  workflowStatus?: "needs_fix" | "in_progress" | "ready_to_publish" | "published";
   issueSummary?: string[];
   missingSummary?: string[];
 }

@@ -15,6 +15,7 @@ import {
 import { useEffect, useMemo, useState } from "react";
 import operatorScene from "./assets/malaysia-ecommerce-operator.png";
 import { buildBeginnerFixCards } from "../../shared/fixCards";
+import { generateFixOutputPack } from "../../shared/fixOutput";
 import { checkOutput } from "../../shared/outputChecker";
 import { generateFixPrompts } from "../../shared/promptTemplates";
 import { buildVisibilityReport } from "../../shared/report";
@@ -76,6 +77,7 @@ export default function App() {
 
   const report = useMemo(() => buildVisibilityReport(snapshot), [snapshot]);
   const prompts = useMemo(() => generateFixPrompts(snapshot), [snapshot]);
+  const fixOutputPack = useMemo(() => generateFixOutputPack(snapshot), [snapshot]);
   const outputCheck = useMemo(() => checkOutput(output), [output]);
   const platformProfile = useMemo(() => getPlatformProfile(snapshot.platform), [snapshot.platform]);
   const checklist = useMemo(
@@ -637,6 +639,7 @@ export default function App() {
                   .filter((item) => !item.completed)
                   .map((item) => item.label)
                   .slice(0, 3);
+              const statusLabel = (saved.workflowStatus || "needs_fix").replace(/_/g, " ");
 
               return (
                 <article key={saved.id}>
@@ -645,17 +648,23 @@ export default function App() {
                       <strong>{saved.name}</strong>
                       <span>{saved.snapshot.url || "No URL saved"}</span>
                     </div>
-                    <em>{saved.snapshot.platform.replace("_", " ")}</em>
+                    <div className="scan-badges">
+                      <em>{saved.snapshot.platform.replace("_", " ")}</em>
+                      <em className={`status-badge ${saved.workflowStatus || "needs_fix"}`}>{statusLabel}</em>
+                    </div>
                   </div>
                   <div className="scan-score-row">
                     <span>
                       SEO <strong>{scores.seo}</strong>
+                      {saved.scoreDelta && <small>{saved.scoreDelta.seo >= 0 ? "+" : ""}{saved.scoreDelta.seo}</small>}
                     </span>
                     <span>
                       GEO <strong>{scores.geo}</strong>
+                      {saved.scoreDelta && <small>{saved.scoreDelta.geo >= 0 ? "+" : ""}{saved.scoreDelta.geo}</small>}
                     </span>
                     <span>
                       AEO <strong>{scores.aeo}</strong>
+                      {saved.scoreDelta && <small>{saved.scoreDelta.aeo >= 0 ? "+" : ""}{saved.scoreDelta.aeo}</small>}
                     </span>
                   </div>
                   <div className="scan-insight-grid">
@@ -697,6 +706,26 @@ export default function App() {
       </section>
 
       <section className="workspace-grid">
+        <div className="section fix-output-panel">
+          <h2>Ready-to-paste fix output</h2>
+          <p className="helper-copy">{fixOutputPack.summary}</p>
+          <div className="output-block-stack">
+            {fixOutputPack.blocks.map((block) => (
+              <article className="output-block" key={block.id}>
+                <div className="fix-card-header">
+                  <strong>{block.label}</strong>
+                  <span>{block.pasteLocation}</span>
+                </div>
+                <textarea readOnly value={block.content} />
+                <button className="secondary-button" onClick={() => copy(block.label, block.content)}>
+                  <Clipboard size={16} />
+                  Copy {block.label}
+                </button>
+              </article>
+            ))}
+          </div>
+        </div>
+
         <div className="section fix-workbench">
           <h2>Beginner fix cards</h2>
           <p className="helper-copy">

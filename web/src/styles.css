@@ -1159,6 +1159,31 @@ button {
   text-transform: capitalize;
 }
 
+.scan-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.scan-card-header .status-badge {
+  color: #0f766e;
+  background: rgba(20,184,166,0.09);
+  border-color: rgba(20,184,166,0.18);
+}
+
+.scan-card-header .status-badge.needs_fix {
+  color: #be123c;
+  background: rgba(244,63,94,0.08);
+  border-color: rgba(244,63,94,0.16);
+}
+
+.scan-card-header .status-badge.in_progress {
+  color: #c2410c;
+  background: rgba(245,158,11,0.1);
+  border-color: rgba(245,158,11,0.2);
+}
+
 .scan-score-row {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1180,6 +1205,14 @@ button {
   color: var(--hero-ink);
   font-size: 20px;
   line-height: 1;
+}
+
+.scan-score-row small {
+  display: inline-flex;
+  margin-top: 5px;
+  color: var(--hero-primary);
+  font-size: 11px;
+  font-weight: 780;
 }
 
 .scan-insight-grid {
@@ -1297,6 +1330,47 @@ button {
 
 .fix-workbench {
   align-content: start;
+}
+
+.fix-output-panel {
+  align-content: start;
+}
+
+.output-block-stack {
+  display: grid;
+  gap: 12px;
+}
+
+.output-block-stack.compact {
+  gap: 10px;
+}
+
+.output-block {
+  display: grid;
+  gap: 10px;
+  border: 1px solid rgba(109, 119, 145, 0.14);
+  border-radius: 18px;
+  padding: 13px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.96), rgba(248,250,255,0.88));
+  box-shadow: 0 10px 26px rgba(35,44,85,0.06);
+}
+
+.output-block textarea {
+  width: 100%;
+  min-height: 150px;
+  border: 1px solid rgba(109, 119, 145, 0.16);
+  border-radius: 14px;
+  padding: 10px;
+  color: #334155;
+  background: rgba(255,255,255,0.86);
+  font-size: 12px;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.output-block-stack.compact .output-block {
+  padding: 12px;
 }
 
 .prompt-panel textarea {

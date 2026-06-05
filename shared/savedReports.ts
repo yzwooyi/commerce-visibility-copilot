@@ -3,6 +3,8 @@ import { buildVisibilityReport } from "./report";
 
 const storageKey = "commerce-visibility-copilot-saved-reports";
 
+type WorkflowStatus = NonNullable<SavedReport["workflowStatus"]>;
+
 function normalizeOwnerId(ownerId?: string): string {
   return ownerId?.trim().toLowerCase().replace(/[^a-z0-9._-]+/g, "-") || "";
 }
@@ -46,8 +48,31 @@ export function saveReportSnapshot(
 ): SavedReport[] {
   const name = snapshot.title.trim() || snapshot.url.trim() || "Untitled product";
   const report = buildVisibilityReport(snapshot);
+  const currentScores = {
+    seo: report.seo.score,
+    geo: report.geo.score,
+    aeo: report.aeo.score
+  };
+  const previousReport = existingReports.find(
+    (item) => (snapshot.url && item.snapshot.url === snapshot.url) || item.name === name
+  );
+  const previousScores = previousReport?.scores;
+  const scoreDelta = previousScores
+    ? {
+        seo: currentScores.seo - previousScores.seo,
+        geo: currentScores.geo - previousScores.geo,
+        aeo: currentScores.aeo - previousScores.aeo
+      }
+    : undefined;
   const issueSummary = Array.from(new Set([...report.seo.reasons, ...report.geo.reasons, ...report.aeo.reasons])).slice(0, 8);
   const missingSummary = report.publishChecklist.filter((item) => !item.completed).map((item) => item.label).slice(0, 8);
+  const completedCount = report.publishChecklist.filter((item) => item.completed).length;
+  const workflowStatus: WorkflowStatus =
+    missingSummary.length === 0
+      ? "ready_to_publish"
+      : completedCount > 0 || previousReport
+        ? "in_progress"
+        : "needs_fix";
   const nextReports = [
     {
       id: String(Date.now()),
@@ -55,15 +80,13 @@ export function saveReportSnapshot(
       savedAt: new Date().toISOString(),
       customerId: normalizeOwnerId(ownerId) || undefined,
       snapshot,
-      scores: {
-        seo: report.seo.score,
-        geo: report.geo.score,
-        aeo: report.aeo.score
-      },
+      scores: currentScores,
+      scoreDelta,
+      workflowStatus,
       issueSummary,
       missingSummary
     },
-    ...existingReports.filter((item) => item.name !== name)
+    ...existingReports.filter((item) => item.name !== name && (!snapshot.url || item.snapshot.url !== snapshot.url))
   ];
 
   return writeSavedReports(nextReports, ownerId);
