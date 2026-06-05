@@ -1,4 +1,4 @@
-import { Check, Clipboard, ExternalLink, RefreshCw, ScanLine, Sparkles, Wrench } from "lucide-react";
+import { Bot, Check, Clipboard, ExternalLink, MessageCircle, RefreshCw, ScanLine, Sparkles, Wrench } from "lucide-react";
 import React, { useMemo, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { buildBeginnerFixCards } from "../../shared/fixCards";
@@ -11,6 +11,12 @@ import type { ProductPageSnapshot, SavedReport, ScoreResult } from "../../shared
 import "../../web/src/styles.css";
 
 type ScanState = "idle" | "scanning" | "ready" | "error";
+
+type AgentMessage = {
+  id: string;
+  role: "agent" | "user";
+  text: string;
+};
 
 function scanProductPageInTab(): ProductPageSnapshot {
   type Platform =
@@ -298,11 +304,26 @@ function ScoreRow({ label, result }: { label: string; result: ScoreResult }) {
   );
 }
 
+function platformName(platform: ProductPageSnapshot["platform"]): string {
+  return platform.replace("_", " ");
+}
+
+function scoreSummary(report: ReturnType<typeof buildVisibilityReport>): string {
+  const lowest = [
+    { label: "Google/search readiness", score: report.seo.score },
+    { label: "AI recommendation readiness", score: report.geo.score },
+    { label: "buyer answer readiness", score: report.aeo.score }
+  ].sort((a, b) => a.score - b.score)[0];
+
+  return `${lowest.label} is the weakest at ${lowest.score}. I will help you fix that first.`;
+}
+
 function App() {
   const [snapshot, setSnapshot] = useState<ProductPageSnapshot | null>(null);
   const [scanState, setScanState] = useState<ScanState>("idle");
   const [copyStatus, setCopyStatus] = useState<string>("");
   const [manualChecklist, setManualChecklist] = useState<Record<string, boolean | undefined>>({});
+  const [pastedBlocks, setPastedBlocks] = useState<Record<string, boolean | undefined>>({});
   const [savedReports, setSavedReports] = useState<SavedReport[]>(() => loadSavedReports());
 
   const report = useMemo(() => (snapshot ? buildVisibilityReport(snapshot) : null), [snapshot]);
@@ -319,6 +340,49 @@ function App() {
   );
   const fixCards = useMemo(() => (snapshot ? buildBeginnerFixCards(snapshot, checklist) : []), [checklist, snapshot]);
   const scanEvidence = snapshot?.scanEvidence;
+  const nextFixCard = fixCards.find((card) => !card.completed);
+  const nextOutputBlock = fixOutputPack?.blocks.find((block) => !pastedBlocks[block.id]) || fixOutputPack?.blocks[0];
+  const agentMessages = useMemo<AgentMessage[]>(() => {
+    if (!snapshot || !report || !fixOutputPack) {
+      return [
+        {
+          id: "hello",
+          role: "agent",
+          text: "I can sit beside your ecommerce product page, scan it, and give you fixes you can paste back into the platform."
+        },
+        {
+          id: "ask-scan",
+          role: "agent",
+          text: "Open a product page, then click Scan current page. I will detect the platform and show the next best fix."
+        }
+      ];
+    }
+
+    const missing = scanEvidence?.missingFields.length
+      ? `I could not confirm: ${scanEvidence.missingFields.slice(0, 3).join(", ")}.`
+      : "I found the main page fields I need for a first pass.";
+    const next = nextOutputBlock
+      ? `Next, copy the ${nextOutputBlock.label} and paste it into ${nextOutputBlock.pasteLocation}.`
+      : "All generated blocks have been copied or marked.";
+
+    return [
+      {
+        id: "detected",
+        role: "agent",
+        text: `I scanned this ${platformName(snapshot.platform)} page. ${scoreSummary(report)}`
+      },
+      {
+        id: "evidence",
+        role: "agent",
+        text: missing
+      },
+      {
+        id: "next",
+        role: "agent",
+        text: next
+      }
+    ];
+  }, [fixOutputPack, nextOutputBlock, report, scanEvidence?.missingFields, snapshot]);
 
   async function scanPage() {
     setScanState("scanning");
@@ -337,6 +401,7 @@ function App() {
       if (!response) throw new Error("No scan result returned.");
       setSnapshot(response);
       setManualChecklist({});
+      setPastedBlocks({});
       setScanState("ready");
     } catch (error) {
       console.error(error);
@@ -365,6 +430,22 @@ function App() {
     window.setTimeout(() => setCopyStatus(""), 1800);
   }
 
+  async function copyNextFix() {
+    if (!nextOutputBlock) return;
+    await copyPrompt(nextOutputBlock.label, nextOutputBlock.content);
+  }
+
+  function markNextPasted() {
+    if (!nextOutputBlock) return;
+    setPastedBlocks({ ...pastedBlocks, [nextOutputBlock.id]: true });
+    const matchingChecklist = checklist.find((item) => item.id === nextOutputBlock.id || nextOutputBlock.id.includes(item.id));
+    if (matchingChecklist) {
+      setManualChecklist({ ...manualChecklist, [matchingChecklist.id]: true });
+    }
+    setCopyStatus(`${nextOutputBlock.label} marked pasted`);
+    window.setTimeout(() => setCopyStatus(""), 1800);
+  }
+
   return (
     <main className="panel">
       <header className="panel-header">
@@ -376,29 +457,48 @@ function App() {
       </header>
 
       <nav className="mini-steps" aria-label="Workflow">
+        <span>Chat</span>
         <span>Scan</span>
-        <span>Score</span>
-        <span>Fix</span>
-        <span>Check</span>
-        <span>Publish</span>
+        <span>Copy</span>
+        <span>Paste</span>
+        <span>Re-scan</span>
       </nav>
 
-      {!snapshot && (
-        <section className="section onboarding-card">
-          <h2>First scan</h2>
-          <ol className="fix-list">
-            <li>Open a product page in Chrome.</li>
-            <li>Click analyze so the plugin reads only this tab.</li>
-            <li>Copy the Claude or Codex task.</li>
-            <li>Paste the result back in the full workspace before publishing.</li>
-          </ol>
-        </section>
-      )}
-
-      <button className="primary-button" onClick={scanPage} disabled={scanState === "scanning"}>
-        <ScanLine size={16} />
-        {scanState === "scanning" ? "Scanning page..." : snapshot ? "Re-scan this product page" : "Analyze this product page"}
-      </button>
+      <section className="section agent-chat">
+        <div className="agent-title">
+          <Bot size={17} />
+          <div>
+            <h2>Ecommerce Visibility Agent</h2>
+            <p>{snapshot ? `Working on ${platformName(snapshot.platform)}` : "Waiting for a product page"}</p>
+          </div>
+        </div>
+        <div className="agent-thread">
+          {agentMessages.map((message) => (
+            <article className={`agent-message ${message.role}`} key={message.id}>
+              <MessageCircle size={14} />
+              <span>{message.text}</span>
+            </article>
+          ))}
+        </div>
+        <div className="agent-actions">
+          <button onClick={scanPage} disabled={scanState === "scanning"}>
+            <ScanLine size={15} />
+            {scanState === "scanning" ? "Scanning..." : snapshot ? "Re-scan" : "Scan current page"}
+          </button>
+          {nextOutputBlock && (
+            <>
+              <button onClick={copyNextFix}>
+                <Clipboard size={15} />
+                Copy next fix
+              </button>
+              <button onClick={markNextPasted}>
+                <Check size={15} />
+                Mark pasted
+              </button>
+            </>
+          )}
+        </div>
+      </section>
 
       {scanState === "error" && (
         <p className="status-message error">Could not scan this tab. Open a visible product page and try again.</p>

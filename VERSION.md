@@ -1,6 +1,6 @@
 # Version
 
-Current version: `v2026.06.05-02`
+Current version: `v2026.06.05-03`
 
 ## Notes
 
@@ -12,3 +12,4 @@ Current version: `v2026.06.05-02`
 - Local customer scan dashboard using browser storage.
 - Ready-to-paste fix output blocks for marketplace sellers.
 - Before/after score delta and workflow status in saved scan dashboard.
+- Chrome side panel agent-first workflow for scan, copy, paste, and re-scan.
