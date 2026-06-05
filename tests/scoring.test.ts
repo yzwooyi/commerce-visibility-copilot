@@ -70,4 +70,21 @@ describe("visibility scoring", () => {
     expect(checklist).toContain("Rewrite Shopee MY product title");
     expect(checklist).not.toContain("Add Product schema");
   });
+
+  it("does not inflate Shopee scores from long listing text alone", () => {
+    const shopeeSnapshot: ProductPageSnapshot = {
+      ...weakSnapshot,
+      url: "https://shopee.com.my/example-product",
+      platform: "shopee",
+      title: "Hydrating Glow Serum for Dry Sensitive Skin Malaysia 30ml",
+      descriptionText:
+        "This product has a long description with many product details and benefits. ".repeat(14),
+      visiblePrice: "RM29.90",
+      visibleRating: "4.8"
+    };
+
+    expect(scoreSeo(shopeeSnapshot).score).toBeLessThan(70);
+    expect(scoreGeo(shopeeSnapshot).score).toBeLessThanOrEqual(55);
+    expect(scoreAeo(shopeeSnapshot).score).toBeLessThan(45);
+  });
 });

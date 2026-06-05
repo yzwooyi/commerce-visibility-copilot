@@ -1,4 +1,4 @@
-import { clampScore, scoreBand } from "./scoringUtils";
+import { clampScore, hasAny, scoreBand } from "./scoringUtils";
 import { getPlatformProfile } from "./platformOptimization";
 import type { ProductPageSnapshot, ScoreResult } from "./types";
 
@@ -7,46 +7,85 @@ export function scoreSeo(snapshot: ProductPageSnapshot): ScoreResult {
   const reasons: string[] = [];
   const topFixes: string[] = [];
   const profile = getPlatformProfile(snapshot.platform);
+  const marketplaceText = `${snapshot.title} ${snapshot.descriptionText} ${snapshot.faqQuestions.join(" ")}`.toLowerCase();
 
   if (profile.category === "marketplace" || profile.category === "amazon") {
-    if (snapshot.title.trim().length >= 45) score += 25;
+    score = 8;
+
+    if (snapshot.title.trim().length >= 55) score += 18;
+    else if (snapshot.title.trim().length >= 35) score += 10;
     else {
       reasons.push(`${profile.label} needs a clearer keyword-rich product title.`);
       topFixes.push("Rewrite the marketplace product title.");
     }
 
-    if (snapshot.descriptionText.trim().length >= 350) score += 25;
+    if (snapshot.descriptionText.trim().length >= 650) score += 18;
+    else if (snapshot.descriptionText.trim().length >= 350) score += 10;
     else {
       reasons.push("The listing description is too thin for marketplace search and buyer decisions.");
       topFixes.push("Expand the marketplace product description.");
     }
 
-    if (snapshot.faqQuestions.length >= 3) score += 15;
+    if (snapshot.faqQuestions.length >= 5 || hasAny(marketplaceText, ["faq", "q:", "a:", "question"])) score += 12;
     else {
       reasons.push("The listing is missing buyer questions that marketplace shoppers ask before checkout.");
       topFixes.push("Add marketplace buyer FAQ.");
     }
 
-    if (snapshot.visiblePrice) score += 10;
+    if (hasAny(marketplaceText, ["delivery", "shipping", "cod", "return", "refund", "warranty", "sabah", "sarawak"])) score += 10;
+    else {
+      reasons.push("The listing does not clearly answer delivery, COD, return, or warranty concerns.");
+      topFixes.push("Add delivery and after-sales answers.");
+    }
+
+    if (hasAny(marketplaceText, ["suitable", "safe", "sensitive", "skin type", "how to use", "apply", "install", "wear"])) score += 10;
+    else {
+      reasons.push("The listing does not clearly answer suitability, safety, or usage questions.");
+      topFixes.push("Add suitability and usage answers.");
+    }
+
+    if (hasAny(marketplaceText, ["review", "rating", "authentic", "original", "official"])) score += 8;
+    else {
+      reasons.push("The listing lacks review, rating, authenticity, or seller trust proof.");
+      topFixes.push("Add trust proof.");
+    }
+
+    if (hasAny(marketplaceText, ["compare", "different", "alternative", "versus", "better than"])) score += 8;
+    else {
+      reasons.push("The listing does not explain how the product differs from alternatives.");
+      topFixes.push("Add a comparison answer.");
+    }
+
+    if (snapshot.visiblePrice) score += 5;
     else {
       reasons.push("The scan could not confirm a visible price.");
       topFixes.push("Confirm price and offer visibility.");
     }
 
-    if (snapshot.visibleRating) score += 10;
+    if (snapshot.visibleRating) score += 5;
     else {
       reasons.push("The scan could not confirm visible rating or review proof.");
       topFixes.push("Add review proof or rating context where the platform allows.");
     }
 
     if (snapshot.imageAltTexts.some((alt) => alt.trim().length >= 15) || snapshot.descriptionText.length >= 500) {
-      score += 10;
+      score += 4;
     } else {
       reasons.push("The listing needs clearer image/product detail cues.");
       topFixes.push("Improve image captions or product detail fields.");
     }
 
-    const finalScore = clampScore(score);
+    let finalScore = clampScore(score);
+    if (snapshot.faqQuestions.length < 3 && !hasAny(marketplaceText, ["faq", "q:", "a:"])) {
+      finalScore = Math.min(finalScore, 68);
+    }
+    if (!hasAny(marketplaceText, ["delivery", "shipping", "cod", "return", "refund", "warranty"])) {
+      finalScore = Math.min(finalScore, 78);
+    }
+    if (!hasAny(marketplaceText, ["review", "rating", "authentic", "original", "official"])) {
+      finalScore = Math.min(finalScore, 84);
+    }
+
     return {
       score: finalScore,
       band: scoreBand(finalScore),
