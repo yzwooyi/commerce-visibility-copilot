@@ -1,0 +1,1440 @@
+{
+  "version": "1.0.0",
+  "gitCommitHash": "ba0a7e10d618df717401383fa0b6a0289bb6ea7a",
+  "generatedAt": "2026-06-22T19:47:25.396Z",
+  "files": {
+    "extension/sidepanel.html": {
+      "filePath": "extension/sidepanel.html",
+      "contentHash": "bf9705f07329c7cdaf089fbfac2f8688c131158bdd08fce799a822ba68dcec96",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 13,
+      "hasStructuralAnalysis": false
+    },
+    "extension/src/background.ts": {
+      "filePath": "extension/src/background.ts",
+      "contentHash": "811a449060ae7b765f02b7060f97dd3a5df63c9f246ab68fd493f27bd11014ed",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 6,
+      "hasStructuralAnalysis": true
+    },
+    "extension/src/sidepanel.tsx": {
+      "filePath": "extension/src/sidepanel.tsx",
+      "contentHash": "3ac88f5b37580e832b8122dc105a27528eb4c8e3eadf6a2c8a55a92abf960905",
+      "functions": [
+        {
+          "name": "scanProductPageInTab",
+          "params": [],
+          "returnType": "ProductPageSnapshot",
+          "exported": false,
+          "lineCount": 269
+        },
+        {
+          "name": "scoreTone",
+          "params": [
+            "result"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "ScoreRow",
+          "params": [
+            "{ label, result }"
+          ],
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "platformName",
+          "params": [
+            "platform"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "scoreSummary",
+          "params": [
+            "report"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "App",
+          "params": [],
+          "exported": false,
+          "lineCount": 336
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "lucide-react",
+          "specifiers": [
+            "Bot",
+            "Check",
+            "Clipboard",
+            "ExternalLink",
+            "MessageCircle",
+            "RefreshCw",
+            "ScanLine",
+            "Sparkles",
+            "Wrench"
+          ]
+        },
+        {
+          "source": "react",
+          "specifiers": [
+            "React",
+            "useMemo",
+            "useState"
+          ]
+        },
+        {
+          "source": "react-dom/client",
+          "specifiers": [
+            "createRoot"
+          ]
+        },
+        {
+          "source": "../../shared/fixCards",
+          "specifiers": [
+            "buildBeginnerFixCards"
+          ]
+        },
+        {
+          "source": "../../shared/fixOutput",
+          "specifiers": [
+            "generateFixOutputPack"
+          ]
+        },
+        {
+          "source": "../../shared/promptTemplates",
+          "specifiers": [
+            "generateFixPrompts"
+          ]
+        },
+        {
+          "source": "../../shared/report",
+          "specifiers": [
+            "buildVisibilityReport"
+          ]
+        },
+        {
+          "source": "../../shared/savedReports",
+          "specifiers": [
+            "loadSavedReports",
+            "saveReportSnapshot"
+          ]
+        },
+        {
+          "source": "../../shared/platformOptimization",
+          "specifiers": [
+            "getPlatformProfile"
+          ]
+        },
+        {
+          "source": "../../shared/types",
+          "specifiers": [
+            "ProductPageSnapshot",
+            "SavedReport",
+            "ScoreResult"
+          ]
+        },
+        {
+          "source": "../../web/src/styles.css",
+          "specifiers": []
+        }
+      ],
+      "exports": [],
+      "totalLines": 659,
+      "hasStructuralAnalysis": true
+    },
+    "index.html": {
+      "filePath": "index.html",
+      "contentHash": "916b289c8f60ccc1b21a6812fe9bceb0487501091499ee6b94a2ab8e67d9f990",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 13,
+      "hasStructuralAnalysis": false
+    },
+    "scripts/package-extension.mjs": {
+      "filePath": "scripts/package-extension.mjs",
+      "contentHash": "b221b462aa4fa294e3e0c645047ab2b48274ab3e5fc9389700b9b48a60041ce2",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "node:fs",
+          "specifiers": [
+            "existsSync",
+            "mkdirSync",
+            "rmSync"
+          ]
+        },
+        {
+          "source": "node:fs/promises",
+          "specifiers": [
+            "cp",
+            "readdir"
+          ]
+        },
+        {
+          "source": "node:path",
+          "specifiers": [
+            "resolve"
+          ]
+        },
+        {
+          "source": "node:child_process",
+          "specifiers": [
+            "execFileSync"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 30,
+      "hasStructuralAnalysis": true
+    },
+    "shared/aeoScoring.ts": {
+      "filePath": "shared/aeoScoring.ts",
+      "contentHash": "1fad5b744af7a86fb418181f10d4c67d5fa649b3dcd527d35b0922bd1d71e591",
+      "functions": [
+        {
+          "name": "scoreAeo",
+          "params": [
+            "snapshot"
+          ],
+          "returnType": "ScoreResult",
+          "exported": true,
+          "lineCount": 56
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "./scoringUtils",
+          "specifiers": [
+            "clampScore",
+            "hasAny",
+            "scoreBand"
+          ]
+        },
+        {
+          "source": "./platformOptimization",
+          "specifiers": [
+            "getPlatformProfile"
+          ]
+        },
+        {
+          "source": "./types",
+          "specifiers": [
+            "ProductPageSnapshot",
+            "ScoreResult"
+          ]
+        }
+      ],
+      "exports": [
+        "scoreAeo"
+      ],
+      "totalLines": 61,
+      "hasStructuralAnalysis": true
+    },
+    "shared/checklist.ts": {
+      "filePath": "shared/checklist.ts",
+      "contentHash": "0066c66a0be3da6e64624e06d13ecc76e61fd365bfd222a38e5699fea88fd8ac",
+      "functions": [
+        {
+          "name": "generatePublishChecklist",
+          "params": [
+            "snapshot"
+          ],
+          "returnType": "ChecklistItem[]",
+          "exported": true,
+          "lineCount": 91
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "./platformOptimization",
+          "specifiers": [
+            "getPlatformProfile"
+          ]
+        },
+        {
+          "source": "./types",
+          "specifiers": [
+            "ChecklistItem",
+            "ProductPageSnapshot"
+          ]
+        }
+      ],
+      "exports": [
+        "generatePublishChecklist"
+      ],
+      "totalLines": 95,
+      "hasStructuralAnalysis": true
+    },
+    "shared/fixCards.ts": {
+      "filePath": "shared/fixCards.ts",
+      "contentHash": "419dd95b02a13c859f1732d42bd3802c275ea2e5df50dfaa1eb874b4e66a012d",
+      "functions": [
+        {
+          "name": "productContext",
+          "params": [
+            "snapshot"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "claudeTask",
+          "params": [
+            "snapshot",
+            "task",
+            "requiredOutput"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 17
+        },
+        {
+          "name": "buildBeginnerFixCards",
+          "params": [
+            "snapshot",
+            "checklist"
+          ],
+          "returnType": "BeginnerFixCard[]",
+          "exported": true,
+          "lineCount": 30
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "./platformOptimization",
+          "specifiers": [
+            "getPlatformProfile"
+          ]
+        },
+        {
+          "source": "./types",
+          "specifiers": [
+            "ChecklistItem",
+            "ProductPageSnapshot"
+          ]
+        }
+      ],
+      "exports": [
+        "buildBeginnerFixCards"
+      ],
+      "totalLines": 262,
+      "hasStructuralAnalysis": true
+    },
+    "shared/fixOutput.ts": {
+      "filePath": "shared/fixOutput.ts",
+      "contentHash": "f9c7193a52b5692631412c8347a0483a4702f17b9fd4042afa71bd2ff3856502",
+      "functions": [
+        {
+          "name": "clean",
+          "params": [
+            "value"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "productName",
+          "params": [
+            "snapshot"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "compactBenefit",
+          "params": [
+            "snapshot"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "marketplaceTitle",
+          "params": [
+            "snapshot"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "faqBlock",
+          "params": [
+            "snapshot"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 30
+        },
+        {
+          "name": "marketplaceDescription",
+          "params": [
+            "snapshot"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 29
+        },
+        {
+          "name": "deliveryBlock",
+          "params": [],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "trustBlock",
+          "params": [
+            "snapshot"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "comparisonBlock",
+          "params": [
+            "snapshot"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "ownedStorePack",
+          "params": [
+            "snapshot"
+          ],
+          "returnType": "GeneratedFixPack",
+          "exported": false,
+          "lineCount": 32
+        },
+        {
+          "name": "marketplacePack",
+          "params": [
+            "snapshot"
+          ],
+          "returnType": "GeneratedFixPack",
+          "exported": false,
+          "lineCount": 44
+        },
+        {
+          "name": "generateFixOutputPack",
+          "params": [
+            "snapshot"
+          ],
+          "returnType": "GeneratedFixPack",
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "./platformOptimization",
+          "specifiers": [
+            "getPlatformProfile"
+          ]
+        },
+        {
+          "source": "./types",
+          "specifiers": [
+            "GeneratedFixPack",
+            "ProductPageSnapshot"
+          ]
+        }
+      ],
+      "exports": [
+        "generateFixOutputPack"
+      ],
+      "totalLines": 198,
+      "hasStructuralAnalysis": true
+    },
+    "shared/geoScoring.ts": {
+      "filePath": "shared/geoScoring.ts",
+      "contentHash": "ed718e7eb480c83bdf2580591f8f84d29f01ccc11e5b2d11bca21f945590a4a0",
+      "functions": [
+        {
+          "name": "scoreGeo",
+          "params": [
+            "snapshot"
+          ],
+          "returnType": "ScoreResult",
+          "exported": true,
+          "lineCount": 68
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "./scoringUtils",
+          "specifiers": [
+            "clampScore",
+            "hasAny",
+            "scoreBand"
+          ]
+        },
+        {
+          "source": "./platformOptimization",
+          "specifiers": [
+            "getPlatformProfile"
+          ]
+        },
+        {
+          "source": "./types",
+          "specifiers": [
+            "ProductPageSnapshot",
+            "ScoreResult"
+          ]
+        }
+      ],
+      "exports": [
+        "scoreGeo"
+      ],
+      "totalLines": 73,
+      "hasStructuralAnalysis": true
+    },
+    "shared/outputChecker.ts": {
+      "filePath": "shared/outputChecker.ts",
+      "contentHash": "bb8edcaf7bd44defec884bc409fecd404a3694deb8f50fcd8ead6ceacd234214",
+      "functions": [
+        {
+          "name": "checkOutput",
+          "params": [
+            "output"
+          ],
+          "returnType": "OutputCheckResult",
+          "exported": true,
+          "lineCount": 18
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "./types",
+          "specifiers": [
+            "OutputCheckResult"
+          ]
+        }
+      ],
+      "exports": [
+        "checkOutput"
+      ],
+      "totalLines": 21,
+      "hasStructuralAnalysis": true
+    },
+    "shared/pageScanner.ts": {
+      "filePath": "shared/pageScanner.ts",
+      "contentHash": "f942d28f06318e298d3e6cc54d1d4540df02befbbf6ffd097e9666e5e9024d9f",
+      "functions": [
+        {
+          "name": "detectPlatform",
+          "params": [
+            "url",
+            "doc"
+          ],
+          "returnType": "Platform",
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "collectText",
+          "params": [
+            "nodes"
+          ],
+          "returnType": "string[]",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "cleanText",
+          "params": [
+            "value"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "metaContent",
+          "params": [
+            "doc",
+            "selectors"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "readSchemaTypes",
+          "params": [
+            "doc"
+          ],
+          "returnType": "string[]",
+          "exported": false,
+          "lineCount": 27
+        },
+        {
+          "name": "readJsonLdRecords",
+          "params": [
+            "doc"
+          ],
+          "returnType": "Record<string, unknown>[]",
+          "exported": false,
+          "lineCount": 24
+        },
+        {
+          "name": "schemaValue",
+          "params": [
+            "records",
+            "keys"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 19
+        },
+        {
+          "name": "firstVisibleText",
+          "params": [
+            "doc",
+            "selectors"
+          ],
+          "returnType": "{ text: string; source: string }",
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "bestTextBlock",
+          "params": [
+            "doc",
+            "selectors"
+          ],
+          "returnType": "{ text: string; source: string; sources: string[] }",
+          "exported": false,
+          "lineCount": 22
+        },
+        {
+          "name": "extractFaqQuestions",
+          "params": [
+            "doc",
+            "bodyText"
+          ],
+          "returnType": "string[]",
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "compactDescription",
+          "params": [
+            "text",
+            "maxLength"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "scanDocument",
+          "params": [
+            "doc"
+          ],
+          "returnType": "ProductPageSnapshot",
+          "exported": true,
+          "lineCount": 102
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "./types",
+          "specifiers": [
+            "Platform",
+            "ProductPageSnapshot"
+          ]
+        }
+      ],
+      "exports": [
+        "scanDocument"
+      ],
+      "totalLines": 261,
+      "hasStructuralAnalysis": true
+    },
+    "shared/platformOptimization.ts": {
+      "filePath": "shared/platformOptimization.ts",
+      "contentHash": "53faaf16fea4baa6cea7817fb85abfc38e99444fb86db890292522c20799ecd0",
+      "functions": [
+        {
+          "name": "getPlatformProfile",
+          "params": [
+            "platform"
+          ],
+          "returnType": "PlatformOptimizationProfile",
+          "exported": true,
+          "lineCount": 79
+        },
+        {
+          "name": "isMarketplacePlatform",
+          "params": [
+            "platform"
+          ],
+          "returnType": "boolean",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "./types",
+          "specifiers": [
+            "Platform"
+          ]
+        }
+      ],
+      "exports": [
+        "getPlatformProfile",
+        "isMarketplacePlatform"
+      ],
+      "totalLines": 100,
+      "hasStructuralAnalysis": true
+    },
+    "shared/promptTemplates.ts": {
+      "filePath": "shared/promptTemplates.ts",
+      "contentHash": "6c1ce25a5372c5266cb47f774674955e1b020389c1e35d82089909478c15ba7a",
+      "functions": [
+        {
+          "name": "productData",
+          "params": [
+            "snapshot"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 31
+        },
+        {
+          "name": "generateFixPrompts",
+          "params": [
+            "snapshot"
+          ],
+          "returnType": "FixPrompts",
+          "exported": true,
+          "lineCount": 93
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "./platformOptimization",
+          "specifiers": [
+            "getPlatformProfile"
+          ]
+        },
+        {
+          "source": "./types",
+          "specifiers": [
+            "FixPrompts",
+            "ProductPageSnapshot"
+          ]
+        }
+      ],
+      "exports": [
+        "generateFixPrompts"
+      ],
+      "totalLines": 129,
+      "hasStructuralAnalysis": true
+    },
+    "shared/report.ts": {
+      "filePath": "shared/report.ts",
+      "contentHash": "ed2e82e49c931a33f1f9fb41c3bc3ad805e95a3fa1ebe8226efaadea5f7f34bb",
+      "functions": [
+        {
+          "name": "buildVisibilityReport",
+          "params": [
+            "snapshot"
+          ],
+          "returnType": "VisibilityReport",
+          "exported": true,
+          "lineCount": 14
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "./aeoScoring",
+          "specifiers": [
+            "scoreAeo"
+          ]
+        },
+        {
+          "source": "./checklist",
+          "specifiers": [
+            "generatePublishChecklist"
+          ]
+        },
+        {
+          "source": "./geoScoring",
+          "specifiers": [
+            "scoreGeo"
+          ]
+        },
+        {
+          "source": "./seoScoring",
+          "specifiers": [
+            "scoreSeo"
+          ]
+        },
+        {
+          "source": "./types",
+          "specifiers": [
+            "ProductPageSnapshot",
+            "VisibilityReport"
+          ]
+        }
+      ],
+      "exports": [
+        "buildVisibilityReport"
+      ],
+      "totalLines": 21,
+      "hasStructuralAnalysis": true
+    },
+    "shared/savedReports.ts": {
+      "filePath": "shared/savedReports.ts",
+      "contentHash": "0a53cc337e517b119b69a030b690e75cb002d1cc5c265901d03aeef62a6115dd",
+      "functions": [
+        {
+          "name": "normalizeOwnerId",
+          "params": [
+            "ownerId"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "keyForOwner",
+          "params": [
+            "ownerId"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "safeStorage",
+          "params": [],
+          "returnType": "Storage | null",
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "loadSavedReports",
+          "params": [
+            "ownerId"
+          ],
+          "returnType": "SavedReport[]",
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "writeSavedReports",
+          "params": [
+            "reports",
+            "ownerId"
+          ],
+          "returnType": "SavedReport[]",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "saveReportSnapshot",
+          "params": [
+            "snapshot",
+            "existingReports",
+            "ownerId"
+          ],
+          "returnType": "SavedReport[]",
+          "exported": true,
+          "lineCount": 50
+        },
+        {
+          "name": "deleteSavedReport",
+          "params": [
+            "id",
+            "existingReports",
+            "ownerId"
+          ],
+          "returnType": "SavedReport[]",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "./types",
+          "specifiers": [
+            "ProductPageSnapshot",
+            "SavedReport"
+          ]
+        },
+        {
+          "source": "./report",
+          "specifiers": [
+            "buildVisibilityReport"
+          ]
+        }
+      ],
+      "exports": [
+        "loadSavedReports",
+        "writeSavedReports",
+        "saveReportSnapshot",
+        "deleteSavedReport"
+      ],
+      "totalLines": 98,
+      "hasStructuralAnalysis": true
+    },
+    "shared/scoringUtils.ts": {
+      "filePath": "shared/scoringUtils.ts",
+      "contentHash": "29928e892bd64ab73ee0aedd8780834a9492884504dfa6cdd944dc021b8531e9",
+      "functions": [
+        {
+          "name": "scoreBand",
+          "params": [
+            "score"
+          ],
+          "returnType": "ScoreBand",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "clampScore",
+          "params": [
+            "score"
+          ],
+          "returnType": "number",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "hasAny",
+          "params": [
+            "text",
+            "terms"
+          ],
+          "returnType": "boolean",
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "./types",
+          "specifiers": [
+            "ScoreBand"
+          ]
+        }
+      ],
+      "exports": [
+        "scoreBand",
+        "clampScore",
+        "hasAny"
+      ],
+      "totalLines": 18,
+      "hasStructuralAnalysis": true
+    },
+    "shared/seoScoring.ts": {
+      "filePath": "shared/seoScoring.ts",
+      "contentHash": "61c58d748d9f4a131d560a6c80e001d90a8e6abaf106c0f826470c436007fff4",
+      "functions": [
+        {
+          "name": "scoreSeo",
+          "params": [
+            "snapshot"
+          ],
+          "returnType": "ScoreResult",
+          "exported": true,
+          "lineCount": 142
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "./scoringUtils",
+          "specifiers": [
+            "clampScore",
+            "hasAny",
+            "scoreBand"
+          ]
+        },
+        {
+          "source": "./platformOptimization",
+          "specifiers": [
+            "getPlatformProfile"
+          ]
+        },
+        {
+          "source": "./types",
+          "specifiers": [
+            "ProductPageSnapshot",
+            "ScoreResult"
+          ]
+        }
+      ],
+      "exports": [
+        "scoreSeo"
+      ],
+      "totalLines": 147,
+      "hasStructuralAnalysis": true
+    },
+    "shared/types.ts": {
+      "filePath": "shared/types.ts",
+      "contentHash": "f28053988f1c98698de76cf38c4932902f80f78dab5a0af37263509c8af03c04",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 109,
+      "hasStructuralAnalysis": true
+    },
+    "tests/fixCards.test.ts": {
+      "filePath": "tests/fixCards.test.ts",
+      "contentHash": "16920c6665461a548f344c11a5c926a619d9b90a679ab359dea98656cfe66744",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "vitest",
+          "specifiers": [
+            "describe",
+            "expect",
+            "it"
+          ]
+        },
+        {
+          "source": "../shared/fixCards",
+          "specifiers": [
+            "buildBeginnerFixCards"
+          ]
+        },
+        {
+          "source": "../shared/checklist",
+          "specifiers": [
+            "generatePublishChecklist"
+          ]
+        },
+        {
+          "source": "../shared/types",
+          "specifiers": [
+            "ProductPageSnapshot"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 34,
+      "hasStructuralAnalysis": true
+    },
+    "tests/fixOutput.test.ts": {
+      "filePath": "tests/fixOutput.test.ts",
+      "contentHash": "9f409307d385ad42d2f83e0407603417198c6553a9e0f17faf48179eef7de966",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "vitest",
+          "specifiers": [
+            "describe",
+            "expect",
+            "it"
+          ]
+        },
+        {
+          "source": "../shared/fixOutput",
+          "specifiers": [
+            "generateFixOutputPack"
+          ]
+        },
+        {
+          "source": "../shared/types",
+          "specifiers": [
+            "ProductPageSnapshot"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 31,
+      "hasStructuralAnalysis": true
+    },
+    "tests/outputChecker.test.ts": {
+      "filePath": "tests/outputChecker.test.ts",
+      "contentHash": "7bc0d0cda0866a0345fcb96c011585534b1e1661562b6382bf11c24c1b805689",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "vitest",
+          "specifiers": [
+            "describe",
+            "expect",
+            "it"
+          ]
+        },
+        {
+          "source": "../shared/outputChecker",
+          "specifiers": [
+            "checkOutput"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 23,
+      "hasStructuralAnalysis": true
+    },
+    "tests/promptTemplates.test.ts": {
+      "filePath": "tests/promptTemplates.test.ts",
+      "contentHash": "103a431223c71ec1c1d66ee9a959ffee988818011a99b2943d789e377aec6716",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "vitest",
+          "specifiers": [
+            "describe",
+            "expect",
+            "it"
+          ]
+        },
+        {
+          "source": "../shared/promptTemplates",
+          "specifiers": [
+            "generateFixPrompts"
+          ]
+        },
+        {
+          "source": "../shared/types",
+          "specifiers": [
+            "ProductPageSnapshot"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 64,
+      "hasStructuralAnalysis": true
+    },
+    "tests/savedReports.test.ts": {
+      "filePath": "tests/savedReports.test.ts",
+      "contentHash": "f7c6e9de3a435e279b5f2294c6e5588bd9ee52e6561cb626ab8b0960f8a052ce",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "vitest",
+          "specifiers": [
+            "describe",
+            "expect",
+            "it",
+            "vi"
+          ]
+        },
+        {
+          "source": "../shared/savedReports",
+          "specifiers": [
+            "saveReportSnapshot"
+          ]
+        },
+        {
+          "source": "../shared/types",
+          "specifiers": [
+            "ProductPageSnapshot"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 59,
+      "hasStructuralAnalysis": true
+    },
+    "tests/scoring.test.ts": {
+      "filePath": "tests/scoring.test.ts",
+      "contentHash": "57d6a3cbfddc812ea558bd75c686b745fd8b41c5defddb2a8488891acf7a17fd",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "vitest",
+          "specifiers": [
+            "describe",
+            "expect",
+            "it"
+          ]
+        },
+        {
+          "source": "../shared/aeoScoring",
+          "specifiers": [
+            "scoreAeo"
+          ]
+        },
+        {
+          "source": "../shared/geoScoring",
+          "specifiers": [
+            "scoreGeo"
+          ]
+        },
+        {
+          "source": "../shared/seoScoring",
+          "specifiers": [
+            "scoreSeo"
+          ]
+        },
+        {
+          "source": "../shared/checklist",
+          "specifiers": [
+            "generatePublishChecklist"
+          ]
+        },
+        {
+          "source": "../shared/types",
+          "specifiers": [
+            "ProductPageSnapshot"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 91,
+      "hasStructuralAnalysis": true
+    },
+    "vite.config.ts": {
+      "filePath": "vite.config.ts",
+      "contentHash": "d67c0dbcbb1d4e7215d2207f5be50e62755ab7639b4ebfbff2cd6ba54a00bb9e",
+      "functions": [
+        {
+          "name": "copyExtensionManifest",
+          "params": [],
+          "exported": false,
+          "lineCount": 16
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "node:fs",
+          "specifiers": [
+            "copyFileSync",
+            "mkdirSync"
+          ]
+        },
+        {
+          "source": "node:path",
+          "specifiers": [
+            "dirname",
+            "resolve"
+          ]
+        },
+        {
+          "source": "node:url",
+          "specifiers": [
+            "fileURLToPath"
+          ]
+        },
+        {
+          "source": "vite",
+          "specifiers": [
+            "defineConfig"
+          ]
+        },
+        {
+          "source": "@vitejs/plugin-react",
+          "specifiers": [
+            "react"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 50,
+      "hasStructuralAnalysis": true
+    },
+    "web/src/App.tsx": {
+      "filePath": "web/src/App.tsx",
+      "contentHash": "c1f56d52f38dd63d9910456e503ef0f247db20f028474091efad825e699ae01e",
+      "functions": [
+        {
+          "name": "parseLines",
+          "params": [
+            "value"
+          ],
+          "returnType": "string[]",
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "App",
+          "params": [],
+          "exported": true,
+          "lineCount": 763
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "lucide-react",
+          "specifiers": [
+            "ArrowRight",
+            "CheckCircle2",
+            "Chrome",
+            "Clipboard",
+            "ExternalLink",
+            "Languages",
+            "RefreshCw",
+            "Search",
+            "ShieldCheck",
+            "Sparkles",
+            "Store",
+            "Wrench"
+          ]
+        },
+        {
+          "source": "react",
+          "specifiers": [
+            "useEffect",
+            "useMemo",
+            "useState"
+          ]
+        },
+        {
+          "source": "./assets/malaysia-ecommerce-operator.png",
+          "specifiers": [
+            "operatorScene"
+          ]
+        },
+        {
+          "source": "../../shared/fixCards",
+          "specifiers": [
+            "buildBeginnerFixCards"
+          ]
+        },
+        {
+          "source": "../../shared/fixOutput",
+          "specifiers": [
+            "generateFixOutputPack"
+          ]
+        },
+        {
+          "source": "../../shared/outputChecker",
+          "specifiers": [
+            "checkOutput"
+          ]
+        },
+        {
+          "source": "../../shared/promptTemplates",
+          "specifiers": [
+            "generateFixPrompts"
+          ]
+        },
+        {
+          "source": "../../shared/report",
+          "specifiers": [
+            "buildVisibilityReport"
+          ]
+        },
+        {
+          "source": "../../shared/savedReports",
+          "specifiers": [
+            "deleteSavedReport",
+            "loadSavedReports",
+            "saveReportSnapshot"
+          ]
+        },
+        {
+          "source": "../../shared/platformOptimization",
+          "specifiers": [
+            "getPlatformProfile"
+          ]
+        },
+        {
+          "source": "../../shared/types",
+          "specifiers": [
+            "ChecklistItem",
+            "Platform",
+            "ProductPageSnapshot",
+            "SavedReport"
+          ]
+        }
+      ],
+      "exports": [
+        "App"
+      ],
+      "totalLines": 829,
+      "hasStructuralAnalysis": true
+    },
+    "web/src/main.tsx": {
+      "filePath": "web/src/main.tsx",
+      "contentHash": "5c2aaaf444b284bad3b90887a67acb49756f6479b8115e9714108f39be3d3fb9",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "React"
+          ]
+        },
+        {
+          "source": "react-dom/client",
+          "specifiers": [
+            "createRoot"
+          ]
+        },
+        {
+          "source": "./App",
+          "specifiers": [
+            "App"
+          ]
+        },
+        {
+          "source": "./styles.css",
+          "specifiers": []
+        }
+      ],
+      "exports": [],
+      "totalLines": 7,
+      "hasStructuralAnalysis": true
+    },
+    "web/src/styles.css": {
+      "filePath": "web/src/styles.css",
+      "contentHash": "d4ab4334eeb4ceb0cc629c562492b73c6b974b3f725a8bfaf8e47161276b408c",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1596,
+      "hasStructuralAnalysis": false
+    }
+  }
+}

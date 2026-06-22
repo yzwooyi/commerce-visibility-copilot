@@ -1,0 +1,2856 @@
+{
+  "version": "1.0.0",
+  "project": {
+    "name": "commerce-visibility-copilot",
+    "languages": [
+      "css",
+      "html",
+      "javascript",
+      "json",
+      "markdown",
+      "typescript"
+    ],
+    "frameworks": [
+      "React",
+      "Vite",
+      "Vitest"
+    ],
+    "description": "No description available",
+    "analyzedAt": "2026-06-22T19:47:25.276Z",
+    "gitCommitHash": "ba0a7e10d618df717401383fa0b6a0289bb6ea7a"
+  },
+  "nodes": [
+    {
+      "id": "file:shared/aeoScoring.ts",
+      "type": "file",
+      "name": "aeoScoring.ts",
+      "filePath": "shared/aeoScoring.ts",
+      "summary": "Computes the Answer Engine Optimization (AEO) score for a page snapshot by inspecting FAQ content, schema markup, and answer-friendly phrasing, returning a banded score with reasons and top fixes.",
+      "tags": [
+        "scoring",
+        "aeo",
+        "validation",
+        "utility",
+        "tested"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:shared/geoScoring.ts",
+      "type": "file",
+      "name": "geoScoring.ts",
+      "filePath": "shared/geoScoring.ts",
+      "summary": "Computes the Generative Engine Optimization (GEO) score for a page snapshot, evaluating LLM-citation signals like clear answers, schema, and structured content, and applies platform-specific bonuses.",
+      "tags": [
+        "scoring",
+        "geo",
+        "validation",
+        "utility",
+        "tested"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:shared/platformOptimization.ts",
+      "type": "file",
+      "name": "platformOptimization.ts",
+      "filePath": "shared/platformOptimization.ts",
+      "summary": "Provides per-platform optimization profiles (owned stores vs marketplaces) and a helper to classify whether a platform is a marketplace, used by all scoring modules.",
+      "tags": [
+        "platform",
+        "profile",
+        "factory",
+        "utility"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:shared/scoringUtils.ts",
+      "type": "file",
+      "name": "scoringUtils.ts",
+      "filePath": "shared/scoringUtils.ts",
+      "summary": "Shared scoring primitives: band classification from a numeric score, score clamping/rounding, and case-insensitive keyword matching used across SEO/GEO/AEO scorers.",
+      "tags": [
+        "utility",
+        "scoring",
+        "helpers",
+        "validation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:shared/seoScoring.ts",
+      "type": "file",
+      "name": "seoScoring.ts",
+      "filePath": "shared/seoScoring.ts",
+      "summary": "Computes the traditional SEO score for a page snapshot across owned-store and marketplace variants, checking title/description/heading/alt-text/schema signals and emitting reasons and prioritized fixes.",
+      "tags": [
+        "scoring",
+        "seo",
+        "validation",
+        "utility",
+        "tested"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:tests/scoring.test.ts",
+      "type": "file",
+      "name": "scoring.test.ts",
+      "filePath": "tests/scoring.test.ts",
+      "summary": "Unit tests covering the SEO, GEO, and AEO scoring functions and the publish checklist generator across representative page snapshots.",
+      "tags": [
+        "test",
+        "scoring",
+        "validation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:shared/aeoScoring.ts:scoreAeo",
+      "type": "function",
+      "name": "scoreAeo",
+      "filePath": "shared/aeoScoring.ts",
+      "lineRange": [
+        5,
+        60
+      ],
+      "summary": "Scores answer-engine readiness from a page snapshot by checking FAQ questions, concise answers, schema types, and platform profile, returning score, band, reasons, and top fixes.",
+      "tags": [
+        "scoring",
+        "aeo",
+        "api-handler",
+        "validation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:shared/geoScoring.ts:scoreGeo",
+      "type": "function",
+      "name": "scoreGeo",
+      "filePath": "shared/geoScoring.ts",
+      "lineRange": [
+        5,
+        72
+      ],
+      "summary": "Scores generative-engine citability from a page snapshot using clear-answer, schema, and structure signals, then applies platform-specific bonuses before clamping and banding the result.",
+      "tags": [
+        "scoring",
+        "geo",
+        "api-handler",
+        "validation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:shared/platformOptimization.ts:getPlatformProfile",
+      "type": "function",
+      "name": "getPlatformProfile",
+      "filePath": "shared/platformOptimization.ts",
+      "lineRange": [
+        17,
+        95
+      ],
+      "summary": "Returns the optimization profile for a given platform, selecting owned-store or marketplace defaults that downstream scorers use to tailor checks and bonuses.",
+      "tags": [
+        "platform",
+        "factory",
+        "profile",
+        "configuration"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:shared/platformOptimization.ts:isMarketplacePlatform",
+      "type": "function",
+      "name": "isMarketplacePlatform",
+      "filePath": "shared/platformOptimization.ts",
+      "lineRange": [
+        97,
+        99
+      ],
+      "summary": "Convenience predicate that returns whether a platform is classified as a marketplace, derived from its resolved platform profile.",
+      "tags": [
+        "platform",
+        "predicate",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:shared/scoringUtils.ts:scoreBand",
+      "type": "function",
+      "name": "scoreBand",
+      "filePath": "shared/scoringUtils.ts",
+      "lineRange": [
+        3,
+        8
+      ],
+      "summary": "Maps a numeric score into a qualitative band (e.g. good/warning/critical) shared by all scoring modules.",
+      "tags": [
+        "utility",
+        "scoring",
+        "classification"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:shared/scoringUtils.ts:clampScore",
+      "type": "function",
+      "name": "clampScore",
+      "filePath": "shared/scoringUtils.ts",
+      "lineRange": [
+        10,
+        12
+      ],
+      "summary": "Clamps and rounds a raw score into the valid 0-100 integer range.",
+      "tags": [
+        "utility",
+        "scoring",
+        "normalization"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:shared/scoringUtils.ts:hasAny",
+      "type": "function",
+      "name": "hasAny",
+      "filePath": "shared/scoringUtils.ts",
+      "lineRange": [
+        14,
+        17
+      ],
+      "summary": "Case-insensitive helper that returns whether a text contains any of the supplied keyword terms.",
+      "tags": [
+        "utility",
+        "matching",
+        "validation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:shared/seoScoring.ts:scoreSeo",
+      "type": "function",
+      "name": "scoreSeo",
+      "filePath": "shared/seoScoring.ts",
+      "lineRange": [
+        5,
+        146
+      ],
+      "summary": "Scores traditional SEO health for a page snapshot, branching between owned-store and marketplace logic to check title, description, headings, alt text, and schema, returning score, band, reasons, and fixes.",
+      "tags": [
+        "scoring",
+        "seo",
+        "api-handler",
+        "validation"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:shared/fixOutput.ts",
+      "type": "file",
+      "name": "fixOutput.ts",
+      "filePath": "shared/fixOutput.ts",
+      "summary": "Generates ready-to-paste marketplace and owned-store content packs (titles, descriptions, FAQ, trust and comparison blocks) from a scanned product snapshot, branching on the detected platform profile.",
+      "tags": [
+        "content-generation",
+        "serialization",
+        "utility",
+        "marketplace",
+        "factory",
+        "tested"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:shared/pageScanner.ts",
+      "type": "file",
+      "name": "pageScanner.ts",
+      "filePath": "shared/pageScanner.ts",
+      "summary": "DOM-scraping engine that inspects a product page document to extract title, meta, description, FAQ, price, rating, schema types and image alt text into a structured ProductSnapshot.",
+      "tags": [
+        "dom-scraping",
+        "extraction",
+        "parser",
+        "data-pipeline",
+        "service"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Heavy use of optional chaining and JSON-LD parsing to read schema.org structured data from the live DOM."
+    },
+    {
+      "id": "file:shared/promptTemplates.ts",
+      "type": "file",
+      "name": "promptTemplates.ts",
+      "filePath": "shared/promptTemplates.ts",
+      "summary": "Builds copy-paste LLM fix prompts by serializing the product snapshot plus scan evidence and weaving in platform-specific focus areas and tasks to avoid.",
+      "tags": [
+        "prompt-engineering",
+        "content-generation",
+        "serialization",
+        "template",
+        "utility",
+        "tested"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:shared/types.ts",
+      "type": "file",
+      "name": "types.ts",
+      "filePath": "shared/types.ts",
+      "summary": "Central TypeScript type-definition module declaring the shared domain models (ProductSnapshot, scan evidence, scoring and report shapes) consumed across the scanner, scoring and output layers.",
+      "tags": [
+        "type-definition",
+        "data-model",
+        "barrel",
+        "shared"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:tests/fixOutput.test.ts",
+      "type": "file",
+      "name": "fixOutput.test.ts",
+      "filePath": "tests/fixOutput.test.ts",
+      "summary": "Unit tests asserting that generateFixOutputPack produces the expected owned-store and marketplace content packs for a sample product snapshot.",
+      "tags": [
+        "test",
+        "unit-test",
+        "content-generation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:tests/promptTemplates.test.ts",
+      "type": "file",
+      "name": "promptTemplates.test.ts",
+      "filePath": "tests/promptTemplates.test.ts",
+      "summary": "Unit tests verifying that generateFixPrompts emits platform-aware fix prompts containing the product data and scan-evidence sections.",
+      "tags": [
+        "test",
+        "unit-test",
+        "prompt-engineering"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:shared/fixOutput.ts:faqBlock",
+      "type": "function",
+      "name": "faqBlock",
+      "filePath": "shared/fixOutput.ts",
+      "lineRange": [
+        29,
+        58
+      ],
+      "summary": "Deduplicates and answers up to eight buyer FAQ questions from the snapshot, applying intent-matched templates for delivery, comparison, usage and suitability queries.",
+      "tags": [
+        "content-generation",
+        "faq",
+        "template"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:shared/fixOutput.ts:marketplaceDescription",
+      "type": "function",
+      "name": "marketplaceDescription",
+      "filePath": "shared/fixOutput.ts",
+      "lineRange": [
+        60,
+        88
+      ],
+      "summary": "Assembles a structured marketplace product description string combining the product name, compact benefit and supporting sections.",
+      "tags": [
+        "content-generation",
+        "marketplace",
+        "serialization"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:shared/fixOutput.ts:ownedStorePack",
+      "type": "function",
+      "name": "ownedStorePack",
+      "filePath": "shared/fixOutput.ts",
+      "lineRange": [
+        116,
+        147
+      ],
+      "summary": "Produces the owned-store content pack (SEO title, meta description, body and FAQ) tailored for a merchant-controlled storefront.",
+      "tags": [
+        "content-generation",
+        "seo",
+        "factory"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:shared/fixOutput.ts:marketplacePack",
+      "type": "function",
+      "name": "marketplacePack",
+      "filePath": "shared/fixOutput.ts",
+      "lineRange": [
+        149,
+        192
+      ],
+      "summary": "Builds the marketplace content pack (title, description, FAQ, delivery, trust and comparison blocks) using the platform profile resolved from the snapshot.",
+      "tags": [
+        "content-generation",
+        "marketplace",
+        "factory"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:shared/fixOutput.ts:generateFixOutputPack",
+      "type": "function",
+      "name": "generateFixOutputPack",
+      "filePath": "shared/fixOutput.ts",
+      "lineRange": [
+        194,
+        197
+      ],
+      "summary": "Exported entry point that dispatches to the owned-store or marketplace pack generator based on the platform profile of the snapshot.",
+      "tags": [
+        "entry-point",
+        "content-generation",
+        "factory"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:shared/pageScanner.ts:detectPlatform",
+      "type": "function",
+      "name": "detectPlatform",
+      "filePath": "shared/pageScanner.ts",
+      "lineRange": [
+        3,
+        15
+      ],
+      "summary": "Infers the e-commerce platform (Shopee, Lazada, TikTok, Shopify, etc.) from the page URL, generator meta tag and body class names.",
+      "tags": [
+        "detection",
+        "dom-scraping",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:shared/pageScanner.ts:readSchemaTypes",
+      "type": "function",
+      "name": "readSchemaTypes",
+      "filePath": "shared/pageScanner.ts",
+      "lineRange": [
+        33,
+        59
+      ],
+      "summary": "Parses all JSON-LD script blocks and collects the distinct schema.org @type values declared on the page, handling nested @graph arrays.",
+      "tags": [
+        "dom-scraping",
+        "json-ld",
+        "extraction"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:shared/pageScanner.ts:readJsonLdRecords",
+      "type": "function",
+      "name": "readJsonLdRecords",
+      "filePath": "shared/pageScanner.ts",
+      "lineRange": [
+        61,
+        84
+      ],
+      "summary": "Reads and flattens every JSON-LD record (including @graph members) from the document into a list of structured-data objects for downstream lookups.",
+      "tags": [
+        "dom-scraping",
+        "json-ld",
+        "extraction"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:shared/pageScanner.ts:schemaValue",
+      "type": "function",
+      "name": "schemaValue",
+      "filePath": "shared/pageScanner.ts",
+      "lineRange": [
+        86,
+        104
+      ],
+      "summary": "Looks up the first non-empty value for a set of keys across parsed JSON-LD records, unwrapping nested objects and arrays.",
+      "tags": [
+        "json-ld",
+        "extraction",
+        "utility"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:shared/pageScanner.ts:bestTextBlock",
+      "type": "function",
+      "name": "bestTextBlock",
+      "filePath": "shared/pageScanner.ts",
+      "lineRange": [
+        115,
+        136
+      ],
+      "summary": "Selects the most substantial visible text block from candidate selectors, deduplicating and ranking by length to find the primary product description.",
+      "tags": [
+        "dom-scraping",
+        "extraction",
+        "heuristic"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:shared/pageScanner.ts:extractFaqQuestions",
+      "type": "function",
+      "name": "extractFaqQuestions",
+      "filePath": "shared/pageScanner.ts",
+      "lineRange": [
+        138,
+        152
+      ],
+      "summary": "Collects buyer questions from FAQ selectors and regex-matched question patterns in the body text, returning a deduplicated list.",
+      "tags": [
+        "dom-scraping",
+        "faq",
+        "extraction"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:shared/pageScanner.ts:scanDocument",
+      "type": "function",
+      "name": "scanDocument",
+      "filePath": "shared/pageScanner.ts",
+      "lineRange": [
+        159,
+        260
+      ],
+      "summary": "Exported orchestrator that scans a product page document end-to-end and returns a full ProductSnapshot with content fields, found/missing signals and scan evidence.",
+      "tags": [
+        "entry-point",
+        "dom-scraping",
+        "extraction",
+        "orchestration"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:shared/promptTemplates.ts:productData",
+      "type": "function",
+      "name": "productData",
+      "filePath": "shared/promptTemplates.ts",
+      "lineRange": [
+        4,
+        34
+      ],
+      "summary": "Serializes a product snapshot and its optional scan evidence into a labeled, multi-line text block embedded inside the generated fix prompts.",
+      "tags": [
+        "serialization",
+        "prompt-engineering",
+        "utility"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:shared/promptTemplates.ts:generateFixPrompts",
+      "type": "function",
+      "name": "generateFixPrompts",
+      "filePath": "shared/promptTemplates.ts",
+      "lineRange": [
+        36,
+        128
+      ],
+      "summary": "Exported builder that composes platform-aware LLM fix prompts, injecting product data, focus areas and tasks-to-avoid drawn from the resolved platform profile.",
+      "tags": [
+        "entry-point",
+        "prompt-engineering",
+        "content-generation"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:extension/src/sidepanel.tsx",
+      "type": "file",
+      "name": "sidepanel.tsx",
+      "filePath": "extension/src/sidepanel.tsx",
+      "summary": "Chrome extension side-panel React app that scrapes the active product page in-tab, builds a visibility report, and renders scores, beginner fix cards, and copyable fix prompts. Acts as the extension's primary UI and orchestration surface.",
+      "tags": [
+        "component",
+        "entry-point",
+        "ui",
+        "event-handler",
+        "service"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Combines an injected in-page scraper (scanProductPageInTab) with React hooks (useState/useMemo) and chrome.* APIs (tabs, scripting, runtime)."
+    },
+    {
+      "id": "function:extension/src/sidepanel.tsx:scanProductPageInTab",
+      "type": "function",
+      "name": "scanProductPageInTab",
+      "filePath": "extension/src/sidepanel.tsx",
+      "lineRange": [
+        21,
+        289
+      ],
+      "summary": "Self-contained scraper injected into the active tab that detects the platform, extracts title, description, price, rating, FAQ, schema, and image alt text, and returns a structured ProductSnapshot with found/missing field evidence.",
+      "tags": [
+        "service",
+        "serialization",
+        "validation",
+        "scraper"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Defines many nested DOM helpers so it can be serialized and executed standalone via chrome.scripting.executeScript."
+    },
+    {
+      "id": "function:extension/src/sidepanel.tsx:App",
+      "type": "function",
+      "name": "App",
+      "filePath": "extension/src/sidepanel.tsx",
+      "lineRange": [
+        321,
+        656
+      ],
+      "summary": "Root React component for the side panel that manages scan/copy/saved-report state, derives the visibility report and fix outputs via useMemo, and renders the scores, evidence, fix cards, and checklist UI.",
+      "tags": [
+        "component",
+        "entry-point",
+        "hook",
+        "event-handler"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:shared/report.ts",
+      "type": "file",
+      "name": "report.ts",
+      "filePath": "shared/report.ts",
+      "summary": "Aggregates the SEO, GEO, and AEO scorers into a single VisibilityReport and attaches a publish checklist from a product snapshot.",
+      "tags": [
+        "service",
+        "aggregator",
+        "scoring"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:shared/report.ts:buildVisibilityReport",
+      "type": "function",
+      "name": "buildVisibilityReport",
+      "filePath": "shared/report.ts",
+      "lineRange": [
+        7,
+        20
+      ],
+      "summary": "Runs the SEO, GEO, and AEO scorers on a snapshot, merges their top fixes, and returns a combined visibility report with a generated publish checklist.",
+      "tags": [
+        "service",
+        "aggregator",
+        "scoring",
+        "factory"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:shared/savedReports.ts",
+      "type": "file",
+      "name": "savedReports.ts",
+      "filePath": "shared/savedReports.ts",
+      "summary": "Persistence layer for saved report snapshots that reads and writes owner-scoped entries to localStorage with safe-storage fallback, building summary metadata when a snapshot is saved.",
+      "tags": [
+        "service",
+        "serialization",
+        "persistence",
+        "data-model",
+        "tested"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Guards against missing localStorage (safeStorage) so it works in non-browser/test environments."
+    },
+    {
+      "id": "function:shared/savedReports.ts:loadSavedReports",
+      "type": "function",
+      "name": "loadSavedReports",
+      "filePath": "shared/savedReports.ts",
+      "lineRange": [
+        25,
+        35
+      ],
+      "summary": "Loads and JSON-parses the saved-report list for a given owner from storage, returning an empty array when storage is unavailable or parsing fails.",
+      "tags": [
+        "service",
+        "serialization",
+        "persistence"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:shared/savedReports.ts:writeSavedReports",
+      "type": "function",
+      "name": "writeSavedReports",
+      "filePath": "shared/savedReports.ts",
+      "lineRange": [
+        37,
+        42
+      ],
+      "summary": "Serializes and persists a capped slice of saved reports to owner-scoped storage, returning the written list.",
+      "tags": [
+        "service",
+        "serialization",
+        "persistence"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:shared/savedReports.ts:saveReportSnapshot",
+      "type": "function",
+      "name": "saveReportSnapshot",
+      "filePath": "shared/savedReports.ts",
+      "lineRange": [
+        44,
+        93
+      ],
+      "summary": "Builds a visibility report for a snapshot, assembles summary metadata (reasons, outstanding checklist items, scores), dedupes any prior entry for the same URL, and persists the new saved-report record.",
+      "tags": [
+        "service",
+        "factory",
+        "persistence",
+        "data-model"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:shared/savedReports.ts:deleteSavedReport",
+      "type": "function",
+      "name": "deleteSavedReport",
+      "filePath": "shared/savedReports.ts",
+      "lineRange": [
+        95,
+        97
+      ],
+      "summary": "Removes a saved report by id from the owner-scoped list and persists the remaining entries.",
+      "tags": [
+        "service",
+        "persistence",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:tests/savedReports.test.ts",
+      "type": "file",
+      "name": "savedReports.test.ts",
+      "filePath": "tests/savedReports.test.ts",
+      "summary": "Unit tests exercising the saved-reports persistence helpers, verifying snapshot saving, deduplication, and deletion against the storage layer.",
+      "tags": [
+        "test",
+        "unit-test",
+        "persistence"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:shared/outputChecker.ts",
+      "type": "file",
+      "name": "outputChecker.ts",
+      "filePath": "shared/outputChecker.ts",
+      "summary": "Validates draft product copy by scanning for empty output, robotic AI boilerplate phrases, and missing keywords, returning a list of flagged issues.",
+      "tags": [
+        "validation",
+        "utility",
+        "content-check",
+        "shared-module",
+        "tested"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:shared/outputChecker.ts:checkOutput",
+      "type": "function",
+      "name": "checkOutput",
+      "filePath": "shared/outputChecker.ts",
+      "lineRange": [
+        3,
+        20
+      ],
+      "summary": "Inspects a draft output string and pushes human-readable issues when the text is blank or contains generic AI-assistant filler phrases.",
+      "tags": [
+        "validation",
+        "content-check",
+        "string-analysis"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:tests/outputChecker.test.ts",
+      "type": "file",
+      "name": "outputChecker.test.ts",
+      "filePath": "tests/outputChecker.test.ts",
+      "summary": "Unit tests verifying that checkOutput flags empty drafts and boilerplate phrasing while passing clean product copy.",
+      "tags": [
+        "test",
+        "validation",
+        "unit-test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:web/src/App.tsx",
+      "type": "file",
+      "name": "App.tsx",
+      "filePath": "web/src/App.tsx",
+      "summary": "Root React component for the web app providing the full merchant workspace: login/session handling, snapshot editing, visibility report rendering, fix cards, saved reports, and output validation.",
+      "tags": [
+        "component",
+        "entry-point",
+        "ui",
+        "state-management",
+        "api-handler"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Large single-component React app using many useState/useMemo hooks plus localStorage persistence for customer sessions and saved reports."
+    },
+    {
+      "id": "function:web/src/App.tsx:App",
+      "type": "function",
+      "name": "App",
+      "filePath": "web/src/App.tsx",
+      "lineRange": [
+        66,
+        828
+      ],
+      "summary": "Default-exported top-level component orchestrating workspace state, derived visibility/fix data, persistence, and the entire rendered merchant UI.",
+      "tags": [
+        "component",
+        "entry-point",
+        "state-management",
+        "ui"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:web/src/main.tsx",
+      "type": "file",
+      "name": "main.tsx",
+      "filePath": "web/src/main.tsx",
+      "summary": "Browser entry point that mounts the App component into the DOM root and loads the global stylesheet.",
+      "tags": [
+        "entry-point",
+        "bootstrap",
+        "react",
+        "ui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:shared/checklist.ts",
+      "type": "file",
+      "name": "checklist.ts",
+      "filePath": "shared/checklist.ts",
+      "summary": "Generates a platform-aware pre-publish checklist from a product snapshot, flagging missing title, description, schema, alt-text, and GEO/AEO coverage items.",
+      "tags": [
+        "validation",
+        "checklist",
+        "seo",
+        "platform-aware",
+        "tested"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:shared/checklist.ts:generatePublishChecklist",
+      "type": "function",
+      "name": "generatePublishChecklist",
+      "filePath": "shared/checklist.ts",
+      "lineRange": [
+        4,
+        94
+      ],
+      "summary": "Builds an ordered list of pass/fail checklist items from a snapshot by testing title length, meta description, schema types, image alt text, and answer-engine content patterns.",
+      "tags": [
+        "validation",
+        "checklist",
+        "content-audit",
+        "regex"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:shared/fixCards.ts",
+      "type": "file",
+      "name": "fixCards.ts",
+      "filePath": "shared/fixCards.ts",
+      "summary": "Builds beginner-friendly fix cards that translate failed checklist items into actionable Claude prompt tasks with product context for each platform.",
+      "tags": [
+        "prompt-generation",
+        "remediation",
+        "seo",
+        "claude-task",
+        "tested"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:shared/fixCards.ts:claudeTask",
+      "type": "function",
+      "name": "claudeTask",
+      "filePath": "shared/fixCards.ts",
+      "lineRange": [
+        26,
+        42
+      ],
+      "summary": "Assembles a Claude prompt string combining product context, a specific task, and the required output format for a single remediation step.",
+      "tags": [
+        "prompt-generation",
+        "claude-task",
+        "string-builder"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:shared/fixCards.ts:buildBeginnerFixCards",
+      "type": "function",
+      "name": "buildBeginnerFixCards",
+      "filePath": "shared/fixCards.ts",
+      "lineRange": [
+        232,
+        261
+      ],
+      "summary": "Maps failed checklist items to platform-specific fix cards, each pairing a remediation description with a ready-to-run Claude task prompt.",
+      "tags": [
+        "remediation",
+        "factory",
+        "checklist",
+        "claude-task"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:tests/fixCards.test.ts",
+      "type": "file",
+      "name": "fixCards.test.ts",
+      "filePath": "tests/fixCards.test.ts",
+      "summary": "Unit tests verifying that buildBeginnerFixCards produces fix cards from checklist output for sample product snapshots.",
+      "tags": [
+        "test",
+        "unit-test",
+        "fix-cards"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:INSTALL.md",
+      "type": "document",
+      "name": "INSTALL.md",
+      "filePath": "INSTALL.md",
+      "summary": "Installation guide covering local web app setup, the build command, and loading the Chrome extension MVP.",
+      "tags": [
+        "documentation",
+        "installation",
+        "setup",
+        "getting-started"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:VERSION.md",
+      "type": "document",
+      "name": "VERSION.md",
+      "filePath": "VERSION.md",
+      "summary": "Records the current project version and release notes for the Commerce Visibility Copilot.",
+      "tags": [
+        "documentation",
+        "versioning",
+        "release-notes"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:index.html",
+      "type": "file",
+      "name": "index.html",
+      "filePath": "index.html",
+      "summary": "Root HTML entry document that mounts the React app into the #root element and loads the web/src/main.tsx module.",
+      "tags": [
+        "entry-point",
+        "markup",
+        "html",
+        "spa-shell"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "package.json",
+      "summary": "NPM manifest defining the project's React/Vite/Vitest dependencies and dev, build, test, and extension-packaging scripts.",
+      "tags": [
+        "configuration",
+        "build-system",
+        "dependencies",
+        "npm"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:tsconfig.json",
+      "type": "config",
+      "name": "tsconfig.json",
+      "filePath": "tsconfig.json",
+      "summary": "TypeScript compiler configuration enabling strict mode and react-jsx, scoped to the web, extension, shared, and tests source trees.",
+      "tags": [
+        "configuration",
+        "typescript",
+        "build-system",
+        "compiler-options"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:outputs/chrome-store-checklist.md",
+      "type": "document",
+      "name": "chrome-store-checklist.md",
+      "filePath": "outputs/chrome-store-checklist.md",
+      "summary": "Short checklist of items required to prepare and submit the Chrome extension to the Chrome Web Store.",
+      "tags": [
+        "documentation",
+        "checklist",
+        "deployment",
+        "chrome-extension"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:outputs/commerce-visibility-copilot-implementation-plan.md",
+      "type": "document",
+      "name": "commerce-visibility-copilot-implementation-plan.md",
+      "filePath": "outputs/commerce-visibility-copilot-implementation-plan.md",
+      "summary": "Detailed 10-task implementation plan covering project scaffolding, shared types, scoring modules, prompt templates, page scanner, extension side panel, web app report UI, and Chrome Store prep with acceptance criteria.",
+      "tags": [
+        "documentation",
+        "implementation-plan",
+        "architecture",
+        "roadmap"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:outputs/commerce-visibility-copilot-mvp-spec.md",
+      "type": "document",
+      "name": "commerce-visibility-copilot-mvp-spec.md",
+      "filePath": "outputs/commerce-visibility-copilot-mvp-spec.md",
+      "summary": "MVP product specification detailing positioning, target user, user flow, SEO/GEO/AEO scoring engines, Claude/Codex prompt packs, extension and web UI, and Chrome Web Store readiness.",
+      "tags": [
+        "documentation",
+        "product-spec",
+        "requirements",
+        "overview"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:docs/superpowers/plans/2026-06-04-commerce-visibility-copilot.md",
+      "type": "document",
+      "name": "2026-06-04-commerce-visibility-copilot.md",
+      "filePath": "docs/superpowers/plans/2026-06-04-commerce-visibility-copilot.md",
+      "summary": "Brief Superpowers planning note pointing to the full Commerce Visibility Copilot implementation plan.",
+      "tags": [
+        "documentation",
+        "planning",
+        "overview"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:docs/superpowers/specs/2026-06-04-commerce-visibility-copilot-design.md",
+      "type": "document",
+      "name": "2026-06-04-commerce-visibility-copilot-design.md",
+      "filePath": "docs/superpowers/specs/2026-06-04-commerce-visibility-copilot-design.md",
+      "summary": "Short Superpowers design specification stub outlining the Commerce Visibility Copilot architecture.",
+      "tags": [
+        "documentation",
+        "design-spec",
+        "overview"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:extension/manifest.json",
+      "type": "config",
+      "name": "manifest.json",
+      "filePath": "extension/manifest.json",
+      "summary": "Chrome extension Manifest V3 declaring the side panel UI, service-worker background script, action button, icons, and host permissions.",
+      "tags": [
+        "configuration",
+        "chrome-extension",
+        "manifest",
+        "permissions"
+      ],
+      "complexity": "simple",
+      "languageNotes": "Manifest V3 uses a service-worker background entry and the side_panel API rather than browser_action popups."
+    },
+    {
+      "id": "file:extension/sidepanel.html",
+      "type": "file",
+      "name": "sidepanel.html",
+      "filePath": "extension/sidepanel.html",
+      "summary": "HTML host page for the Chrome extension side panel that mounts the bundled React application.",
+      "tags": [
+        "markup",
+        "chrome-extension",
+        "entry-point",
+        "side-panel"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:extension/src/background.ts",
+      "type": "file",
+      "name": "background.ts",
+      "filePath": "extension/src/background.ts",
+      "summary": "Extension service-worker background script that opens the side panel when the toolbar action icon is clicked.",
+      "tags": [
+        "chrome-extension",
+        "service-worker",
+        "event-handler",
+        "side-panel"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scripts/package-extension.mjs",
+      "type": "file",
+      "name": "package-extension.mjs",
+      "filePath": "scripts/package-extension.mjs",
+      "summary": "Build helper script that bundles the dist output into a distributable Chrome extension zip after verifying the build exists.",
+      "tags": [
+        "build-system",
+        "script",
+        "packaging",
+        "chrome-extension"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:vite.config.ts",
+      "type": "file",
+      "name": "vite.config.ts",
+      "filePath": "vite.config.ts",
+      "summary": "Vite build configuration defining the web app, side panel, and background script entry points plus a plugin that copies extension manifest and icons into dist.",
+      "tags": [
+        "build-system",
+        "config",
+        "vite",
+        "chrome-extension"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:vite.config.ts:copyExtensionManifest",
+      "type": "function",
+      "name": "copyExtensionManifest",
+      "filePath": "vite.config.ts",
+      "lineRange": [
+        9,
+        24
+      ],
+      "summary": "Vite plugin factory whose writeBundle hook copies the extension manifest and icon assets into the dist directory after each build.",
+      "tags": [
+        "build-system",
+        "vite-plugin",
+        "factory",
+        "asset-copy"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:web/src/styles.css",
+      "type": "file",
+      "name": "styles.css",
+      "filePath": "web/src/styles.css",
+      "summary": "Global stylesheet defining the full visual design system for the web app and extension side panel across roughly 1600 lines.",
+      "tags": [
+        "markup",
+        "stylesheet",
+        "design-system",
+        "ui-styling"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Large hand-authored CSS sheet shared by both the web app and the Chrome extension side panel."
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:shared/aeoScoring.ts",
+      "target": "file:shared/platformOptimization.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:shared/aeoScoring.ts",
+      "target": "file:shared/scoringUtils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:shared/aeoScoring.ts",
+      "target": "file:shared/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:shared/geoScoring.ts",
+      "target": "file:shared/platformOptimization.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:shared/geoScoring.ts",
+      "target": "file:shared/scoringUtils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:shared/geoScoring.ts",
+      "target": "file:shared/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:shared/platformOptimization.ts",
+      "target": "file:shared/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:shared/scoringUtils.ts",
+      "target": "file:shared/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:shared/seoScoring.ts",
+      "target": "file:shared/platformOptimization.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:shared/seoScoring.ts",
+      "target": "file:shared/scoringUtils.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:shared/seoScoring.ts",
+      "target": "file:shared/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/scoring.test.ts",
+      "target": "file:shared/aeoScoring.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/scoring.test.ts",
+      "target": "file:shared/checklist.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/scoring.test.ts",
+      "target": "file:shared/geoScoring.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/scoring.test.ts",
+      "target": "file:shared/seoScoring.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/scoring.test.ts",
+      "target": "file:shared/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:shared/aeoScoring.ts",
+      "target": "function:shared/aeoScoring.ts:scoreAeo",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:shared/aeoScoring.ts",
+      "target": "function:shared/aeoScoring.ts:scoreAeo",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:shared/geoScoring.ts",
+      "target": "function:shared/geoScoring.ts:scoreGeo",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:shared/geoScoring.ts",
+      "target": "function:shared/geoScoring.ts:scoreGeo",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:shared/platformOptimization.ts",
+      "target": "function:shared/platformOptimization.ts:getPlatformProfile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:shared/platformOptimization.ts",
+      "target": "function:shared/platformOptimization.ts:getPlatformProfile",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:shared/platformOptimization.ts",
+      "target": "function:shared/platformOptimization.ts:isMarketplacePlatform",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:shared/platformOptimization.ts",
+      "target": "function:shared/platformOptimization.ts:isMarketplacePlatform",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:shared/scoringUtils.ts",
+      "target": "function:shared/scoringUtils.ts:scoreBand",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:shared/scoringUtils.ts",
+      "target": "function:shared/scoringUtils.ts:scoreBand",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:shared/scoringUtils.ts",
+      "target": "function:shared/scoringUtils.ts:clampScore",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:shared/scoringUtils.ts",
+      "target": "function:shared/scoringUtils.ts:clampScore",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:shared/scoringUtils.ts",
+      "target": "function:shared/scoringUtils.ts:hasAny",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:shared/scoringUtils.ts",
+      "target": "function:shared/scoringUtils.ts:hasAny",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:shared/seoScoring.ts",
+      "target": "function:shared/seoScoring.ts:scoreSeo",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:shared/seoScoring.ts",
+      "target": "function:shared/seoScoring.ts:scoreSeo",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/aeoScoring.ts:scoreAeo",
+      "target": "function:shared/platformOptimization.ts:getPlatformProfile",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/aeoScoring.ts:scoreAeo",
+      "target": "function:shared/scoringUtils.ts:hasAny",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/aeoScoring.ts:scoreAeo",
+      "target": "function:shared/scoringUtils.ts:clampScore",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/aeoScoring.ts:scoreAeo",
+      "target": "function:shared/scoringUtils.ts:scoreBand",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/geoScoring.ts:scoreGeo",
+      "target": "function:shared/platformOptimization.ts:getPlatformProfile",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/geoScoring.ts:scoreGeo",
+      "target": "function:shared/scoringUtils.ts:hasAny",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/geoScoring.ts:scoreGeo",
+      "target": "function:shared/scoringUtils.ts:clampScore",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/geoScoring.ts:scoreGeo",
+      "target": "function:shared/scoringUtils.ts:scoreBand",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/seoScoring.ts:scoreSeo",
+      "target": "function:shared/platformOptimization.ts:getPlatformProfile",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/seoScoring.ts:scoreSeo",
+      "target": "function:shared/scoringUtils.ts:hasAny",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/seoScoring.ts:scoreSeo",
+      "target": "function:shared/scoringUtils.ts:clampScore",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/seoScoring.ts:scoreSeo",
+      "target": "function:shared/scoringUtils.ts:scoreBand",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/platformOptimization.ts:isMarketplacePlatform",
+      "target": "function:shared/platformOptimization.ts:getPlatformProfile",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:shared/aeoScoring.ts",
+      "target": "file:tests/scoring.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:shared/geoScoring.ts",
+      "target": "file:tests/scoring.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:shared/seoScoring.ts",
+      "target": "file:tests/scoring.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:shared/fixOutput.ts",
+      "target": "file:shared/platformOptimization.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:shared/fixOutput.ts",
+      "target": "file:shared/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:shared/pageScanner.ts",
+      "target": "file:shared/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:shared/promptTemplates.ts",
+      "target": "file:shared/platformOptimization.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:shared/promptTemplates.ts",
+      "target": "file:shared/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/fixOutput.test.ts",
+      "target": "file:shared/fixOutput.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/fixOutput.test.ts",
+      "target": "file:shared/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/promptTemplates.test.ts",
+      "target": "file:shared/promptTemplates.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/promptTemplates.test.ts",
+      "target": "file:shared/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:shared/fixOutput.ts",
+      "target": "function:shared/fixOutput.ts:faqBlock",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:shared/fixOutput.ts",
+      "target": "function:shared/fixOutput.ts:marketplaceDescription",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:shared/fixOutput.ts",
+      "target": "function:shared/fixOutput.ts:ownedStorePack",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:shared/fixOutput.ts",
+      "target": "function:shared/fixOutput.ts:marketplacePack",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:shared/fixOutput.ts",
+      "target": "function:shared/fixOutput.ts:generateFixOutputPack",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:shared/fixOutput.ts",
+      "target": "function:shared/fixOutput.ts:generateFixOutputPack",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:shared/pageScanner.ts",
+      "target": "function:shared/pageScanner.ts:detectPlatform",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:shared/pageScanner.ts",
+      "target": "function:shared/pageScanner.ts:readSchemaTypes",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:shared/pageScanner.ts",
+      "target": "function:shared/pageScanner.ts:readJsonLdRecords",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:shared/pageScanner.ts",
+      "target": "function:shared/pageScanner.ts:schemaValue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:shared/pageScanner.ts",
+      "target": "function:shared/pageScanner.ts:bestTextBlock",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:shared/pageScanner.ts",
+      "target": "function:shared/pageScanner.ts:extractFaqQuestions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:shared/pageScanner.ts",
+      "target": "function:shared/pageScanner.ts:scanDocument",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:shared/pageScanner.ts",
+      "target": "function:shared/pageScanner.ts:scanDocument",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:shared/promptTemplates.ts",
+      "target": "function:shared/promptTemplates.ts:productData",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:shared/promptTemplates.ts",
+      "target": "function:shared/promptTemplates.ts:generateFixPrompts",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:shared/promptTemplates.ts",
+      "target": "function:shared/promptTemplates.ts:generateFixPrompts",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/pageScanner.ts:scanDocument",
+      "target": "function:shared/pageScanner.ts:readJsonLdRecords",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/pageScanner.ts:scanDocument",
+      "target": "function:shared/pageScanner.ts:readSchemaTypes",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/pageScanner.ts:scanDocument",
+      "target": "function:shared/pageScanner.ts:extractFaqQuestions",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/pageScanner.ts:scanDocument",
+      "target": "function:shared/pageScanner.ts:bestTextBlock",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/pageScanner.ts:scanDocument",
+      "target": "function:shared/pageScanner.ts:detectPlatform",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/pageScanner.ts:scanDocument",
+      "target": "function:shared/pageScanner.ts:schemaValue",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/fixOutput.ts:generateFixOutputPack",
+      "target": "function:shared/fixOutput.ts:ownedStorePack",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/fixOutput.ts:generateFixOutputPack",
+      "target": "function:shared/fixOutput.ts:marketplacePack",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/fixOutput.ts:marketplacePack",
+      "target": "function:shared/fixOutput.ts:marketplaceDescription",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/fixOutput.ts:marketplacePack",
+      "target": "function:shared/fixOutput.ts:faqBlock",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/fixOutput.ts:ownedStorePack",
+      "target": "function:shared/fixOutput.ts:faqBlock",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/fixOutput.ts:marketplacePack",
+      "target": "function:shared/platformOptimization.ts:getPlatformProfile",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/fixOutput.ts:generateFixOutputPack",
+      "target": "function:shared/platformOptimization.ts:getPlatformProfile",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/promptTemplates.ts:generateFixPrompts",
+      "target": "function:shared/promptTemplates.ts:productData",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/promptTemplates.ts:generateFixPrompts",
+      "target": "function:shared/platformOptimization.ts:getPlatformProfile",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:shared/fixOutput.ts",
+      "target": "file:tests/fixOutput.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:shared/promptTemplates.ts",
+      "target": "file:tests/promptTemplates.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:extension/src/sidepanel.tsx",
+      "target": "file:shared/fixCards.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:extension/src/sidepanel.tsx",
+      "target": "file:shared/fixOutput.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:extension/src/sidepanel.tsx",
+      "target": "file:shared/platformOptimization.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:extension/src/sidepanel.tsx",
+      "target": "file:shared/promptTemplates.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:extension/src/sidepanel.tsx",
+      "target": "file:shared/report.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:extension/src/sidepanel.tsx",
+      "target": "file:shared/savedReports.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:extension/src/sidepanel.tsx",
+      "target": "file:shared/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:extension/src/sidepanel.tsx",
+      "target": "file:web/src/styles.css",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:shared/report.ts",
+      "target": "file:shared/aeoScoring.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:shared/report.ts",
+      "target": "file:shared/checklist.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:shared/report.ts",
+      "target": "file:shared/geoScoring.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:shared/report.ts",
+      "target": "file:shared/seoScoring.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:shared/report.ts",
+      "target": "file:shared/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:shared/savedReports.ts",
+      "target": "file:shared/report.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:shared/savedReports.ts",
+      "target": "file:shared/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/savedReports.test.ts",
+      "target": "file:shared/savedReports.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/savedReports.test.ts",
+      "target": "file:shared/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:extension/src/sidepanel.tsx",
+      "target": "function:extension/src/sidepanel.tsx:scanProductPageInTab",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:extension/src/sidepanel.tsx",
+      "target": "function:extension/src/sidepanel.tsx:App",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:shared/report.ts",
+      "target": "function:shared/report.ts:buildVisibilityReport",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:shared/report.ts",
+      "target": "function:shared/report.ts:buildVisibilityReport",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:shared/savedReports.ts",
+      "target": "function:shared/savedReports.ts:loadSavedReports",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:shared/savedReports.ts",
+      "target": "function:shared/savedReports.ts:loadSavedReports",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:shared/savedReports.ts",
+      "target": "function:shared/savedReports.ts:writeSavedReports",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:shared/savedReports.ts",
+      "target": "function:shared/savedReports.ts:writeSavedReports",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:shared/savedReports.ts",
+      "target": "function:shared/savedReports.ts:saveReportSnapshot",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:shared/savedReports.ts",
+      "target": "function:shared/savedReports.ts:saveReportSnapshot",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:shared/savedReports.ts",
+      "target": "function:shared/savedReports.ts:deleteSavedReport",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:shared/savedReports.ts",
+      "target": "function:shared/savedReports.ts:deleteSavedReport",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/report.ts:buildVisibilityReport",
+      "target": "function:shared/seoScoring.ts:scoreSeo",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/report.ts:buildVisibilityReport",
+      "target": "function:shared/geoScoring.ts:scoreGeo",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/report.ts:buildVisibilityReport",
+      "target": "function:shared/aeoScoring.ts:scoreAeo",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/report.ts:buildVisibilityReport",
+      "target": "function:shared/checklist.ts:generatePublishChecklist",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/savedReports.ts:saveReportSnapshot",
+      "target": "function:shared/report.ts:buildVisibilityReport",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/savedReports.ts:saveReportSnapshot",
+      "target": "function:shared/savedReports.ts:loadSavedReports",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/savedReports.ts:saveReportSnapshot",
+      "target": "function:shared/savedReports.ts:writeSavedReports",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/savedReports.ts:deleteSavedReport",
+      "target": "function:shared/savedReports.ts:loadSavedReports",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/savedReports.ts:deleteSavedReport",
+      "target": "function:shared/savedReports.ts:writeSavedReports",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:extension/src/sidepanel.tsx:App",
+      "target": "function:shared/report.ts:buildVisibilityReport",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:extension/src/sidepanel.tsx:App",
+      "target": "function:shared/savedReports.ts:loadSavedReports",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:extension/src/sidepanel.tsx:App",
+      "target": "function:shared/savedReports.ts:saveReportSnapshot",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:extension/src/sidepanel.tsx:App",
+      "target": "function:shared/promptTemplates.ts:generateFixPrompts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:extension/src/sidepanel.tsx:App",
+      "target": "function:shared/fixOutput.ts:generateFixOutputPack",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:extension/src/sidepanel.tsx:App",
+      "target": "function:shared/platformOptimization.ts:getPlatformProfile",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:extension/src/sidepanel.tsx:App",
+      "target": "function:shared/fixCards.ts:buildBeginnerFixCards",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:shared/savedReports.ts",
+      "target": "file:tests/savedReports.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:shared/outputChecker.ts",
+      "target": "file:shared/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:shared/outputChecker.ts",
+      "target": "function:shared/outputChecker.ts:checkOutput",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:shared/outputChecker.ts",
+      "target": "function:shared/outputChecker.ts:checkOutput",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:tests/outputChecker.test.ts",
+      "target": "file:shared/outputChecker.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:shared/outputChecker.ts",
+      "target": "file:tests/outputChecker.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:web/src/App.tsx",
+      "target": "file:shared/fixCards.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/App.tsx",
+      "target": "file:shared/fixOutput.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/App.tsx",
+      "target": "file:shared/outputChecker.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/App.tsx",
+      "target": "file:shared/platformOptimization.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/App.tsx",
+      "target": "file:shared/promptTemplates.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/App.tsx",
+      "target": "file:shared/report.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/App.tsx",
+      "target": "file:shared/savedReports.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/App.tsx",
+      "target": "file:shared/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/App.tsx",
+      "target": "function:web/src/App.tsx:App",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:web/src/App.tsx",
+      "target": "function:web/src/App.tsx:App",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:web/src/App.tsx:App",
+      "target": "function:shared/outputChecker.ts:checkOutput",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:web/src/App.tsx:App",
+      "target": "function:shared/report.ts:buildVisibilityReport",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:web/src/App.tsx:App",
+      "target": "function:shared/promptTemplates.ts:generateFixPrompts",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:web/src/App.tsx:App",
+      "target": "function:shared/fixOutput.ts:generateFixOutputPack",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:web/src/App.tsx:App",
+      "target": "function:shared/platformOptimization.ts:getPlatformProfile",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:web/src/App.tsx:App",
+      "target": "function:shared/fixCards.ts:buildBeginnerFixCards",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:web/src/App.tsx:App",
+      "target": "function:shared/savedReports.ts:loadSavedReports",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:web/src/App.tsx:App",
+      "target": "function:shared/savedReports.ts:saveReportSnapshot",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:web/src/App.tsx:App",
+      "target": "function:shared/savedReports.ts:deleteSavedReport",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:web/src/main.tsx",
+      "target": "file:web/src/App.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/main.tsx",
+      "target": "file:web/src/styles.css",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:web/src/main.tsx",
+      "target": "function:web/src/App.tsx:App",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:shared/checklist.ts",
+      "target": "file:shared/platformOptimization.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:shared/checklist.ts",
+      "target": "file:shared/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:shared/fixCards.ts",
+      "target": "file:shared/platformOptimization.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:shared/fixCards.ts",
+      "target": "file:shared/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/fixCards.test.ts",
+      "target": "file:shared/checklist.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/fixCards.test.ts",
+      "target": "file:shared/fixCards.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:tests/fixCards.test.ts",
+      "target": "file:shared/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:shared/checklist.ts",
+      "target": "function:shared/checklist.ts:generatePublishChecklist",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:shared/checklist.ts",
+      "target": "function:shared/checklist.ts:generatePublishChecklist",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:shared/fixCards.ts",
+      "target": "function:shared/fixCards.ts:claudeTask",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:shared/fixCards.ts",
+      "target": "function:shared/fixCards.ts:buildBeginnerFixCards",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:shared/fixCards.ts",
+      "target": "function:shared/fixCards.ts:buildBeginnerFixCards",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/checklist.ts:generatePublishChecklist",
+      "target": "function:shared/platformOptimization.ts:getPlatformProfile",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/fixCards.ts:buildBeginnerFixCards",
+      "target": "function:shared/platformOptimization.ts:getPlatformProfile",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/fixCards.ts:claudeTask",
+      "target": "function:shared/platformOptimization.ts:getPlatformProfile",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:shared/fixCards.ts:buildBeginnerFixCards",
+      "target": "function:shared/fixCards.ts:claudeTask",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:shared/checklist.ts",
+      "target": "file:tests/fixCards.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:shared/fixCards.ts",
+      "target": "file:tests/fixCards.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:index.html",
+      "target": "file:web/src/main.tsx",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:package.json",
+      "target": "file:web/src/main.tsx",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:package.json",
+      "target": "file:scripts/package-extension.mjs",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:package.json",
+      "target": "file:vite.config.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:tsconfig.json",
+      "target": "file:web/src/main.tsx",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:tsconfig.json",
+      "target": "file:extension/src/background.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:tsconfig.json",
+      "target": "file:vite.config.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "document:INSTALL.md",
+      "target": "file:web/src/main.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:outputs/commerce-visibility-copilot-implementation-plan.md",
+      "target": "file:shared/types.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:outputs/commerce-visibility-copilot-implementation-plan.md",
+      "target": "file:shared/seoScoring.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:outputs/commerce-visibility-copilot-implementation-plan.md",
+      "target": "file:shared/geoScoring.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:outputs/commerce-visibility-copilot-implementation-plan.md",
+      "target": "file:shared/aeoScoring.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:outputs/commerce-visibility-copilot-implementation-plan.md",
+      "target": "file:shared/promptTemplates.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:outputs/commerce-visibility-copilot-implementation-plan.md",
+      "target": "file:shared/checklist.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:outputs/commerce-visibility-copilot-implementation-plan.md",
+      "target": "file:shared/pageScanner.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:outputs/commerce-visibility-copilot-implementation-plan.md",
+      "target": "file:extension/src/sidepanel.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:outputs/commerce-visibility-copilot-implementation-plan.md",
+      "target": "file:web/src/App.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:outputs/commerce-visibility-copilot-implementation-plan.md",
+      "target": "file:shared/outputChecker.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:outputs/commerce-visibility-copilot-mvp-spec.md",
+      "target": "file:shared/seoScoring.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:outputs/commerce-visibility-copilot-mvp-spec.md",
+      "target": "file:shared/geoScoring.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:outputs/commerce-visibility-copilot-mvp-spec.md",
+      "target": "file:shared/aeoScoring.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:outputs/commerce-visibility-copilot-mvp-spec.md",
+      "target": "file:shared/promptTemplates.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:outputs/commerce-visibility-copilot-mvp-spec.md",
+      "target": "file:shared/outputChecker.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:outputs/commerce-visibility-copilot-mvp-spec.md",
+      "target": "file:extension/src/sidepanel.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:outputs/commerce-visibility-copilot-mvp-spec.md",
+      "target": "file:web/src/App.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:outputs/chrome-store-checklist.md",
+      "target": "config:extension/manifest.json",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:vite.config.ts",
+      "target": "function:vite.config.ts:copyExtensionManifest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    }
+  ],
+  "layers": [
+    {
+      "id": "layer:core-domain",
+      "name": "Core Scoring & Content Engine",
+      "description": "Framework-agnostic shared/ modules that compute SEO/GEO/AEO scores, run platform-aware checklists, scrape page DOM, generate fix prompts and reports, and define the shared TypeScript data model consumed by every surface.",
+      "nodeIds": [
+        "file:shared/aeoScoring.ts",
+        "file:shared/geoScoring.ts",
+        "file:shared/platformOptimization.ts",
+        "file:shared/scoringUtils.ts",
+        "file:shared/seoScoring.ts",
+        "file:shared/fixOutput.ts",
+        "file:shared/pageScanner.ts",
+        "file:shared/promptTemplates.ts",
+        "file:shared/types.ts",
+        "file:shared/report.ts",
+        "file:shared/savedReports.ts",
+        "file:shared/outputChecker.ts",
+        "file:shared/checklist.ts",
+        "file:shared/fixCards.ts"
+      ]
+    },
+    {
+      "id": "layer:client-surfaces",
+      "name": "Client Surfaces",
+      "description": "The two React/TypeScript delivery surfaces that consume the core engine: the standalone web app (App/main entry) and the Chrome extension side panel plus its background service worker.",
+      "nodeIds": [
+        "file:extension/src/sidepanel.tsx",
+        "file:web/src/App.tsx",
+        "file:web/src/main.tsx",
+        "file:extension/src/background.ts"
+      ]
+    },
+    {
+      "id": "layer:test",
+      "name": "Test Suite",
+      "description": "Vitest unit tests that validate the core scoring, fix-output, prompt-template, saved-report, output-checker, and fix-card modules in shared/.",
+      "nodeIds": [
+        "file:tests/scoring.test.ts",
+        "file:tests/fixOutput.test.ts",
+        "file:tests/promptTemplates.test.ts",
+        "file:tests/savedReports.test.ts",
+        "file:tests/outputChecker.test.ts",
+        "file:tests/fixCards.test.ts"
+      ]
+    },
+    {
+      "id": "layer:build-config",
+      "name": "Build & Configuration",
+      "description": "Build tooling and project configuration: Vite config, npm/TypeScript config, the Chrome extension manifest, HTML SPA/side-panel shells, global styles, and the extension packaging script.",
+      "nodeIds": [
+        "file:index.html",
+        "config:package.json",
+        "config:tsconfig.json",
+        "config:extension/manifest.json",
+        "file:extension/sidepanel.html",
+        "file:scripts/package-extension.mjs",
+        "file:vite.config.ts",
+        "file:web/src/styles.css"
+      ]
+    },
+    {
+      "id": "layer:documentation",
+      "name": "Documentation",
+      "description": "Install/version notes plus the product spec, implementation plan, design spec, and Chrome-store checklist that document the commerce-visibility-copilot.",
+      "nodeIds": [
+        "document:INSTALL.md",
+        "document:VERSION.md",
+        "document:outputs/chrome-store-checklist.md",
+        "document:outputs/commerce-visibility-copilot-implementation-plan.md",
+        "document:outputs/commerce-visibility-copilot-mvp-spec.md",
+        "document:docs/superpowers/plans/2026-06-04-commerce-visibility-copilot.md",
+        "document:docs/superpowers/specs/2026-06-04-commerce-visibility-copilot-design.md"
+      ]
+    }
+  ],
+  "tour": [
+    {
+      "order": 1,
+      "title": "Project Overview",
+      "description": "There is no README, so the MVP product specification is the best place to learn what this project is. The Commerce Visibility Copilot scores a product page across three lenses (traditional SEO, Generative Engine Optimization, and Answer Engine Optimization) and then hands merchants copy-paste fixes. This spec lays out the positioning, the target merchant, the end-to-end user flow, and the two delivery surfaces (a web app and a Chrome extension) that the rest of the tour explores.",
+      "nodeIds": [
+        "document:outputs/commerce-visibility-copilot-mvp-spec.md"
+      ]
+    },
+    {
+      "order": 2,
+      "title": "The Build Roadmap",
+      "description": "Building on the product vision from Step 1, the implementation plan breaks the work into ten sequenced tasks with acceptance criteria: scaffolding, shared types, the three scoring modules, prompt templates, the page scanner, the extension side panel, the web report UI, and Chrome Web Store prep. Reading it first gives you the intended layering, so the dependency-ordered code stops ahead feel like a guided walk rather than a maze.",
+      "nodeIds": [
+        "document:outputs/commerce-visibility-copilot-implementation-plan.md",
+        "document:docs/superpowers/specs/2026-06-04-commerce-visibility-copilot-design.md"
+      ]
+    },
+    {
+      "order": 3,
+      "title": "The Shared Data Model",
+      "description": "Everything in the codebase converges on shared/types.ts, the most depended-upon file in the project (21 incoming references). It declares the domain vocabulary, ProductSnapshot, scan evidence, scoring shapes, and the report structure, that the scanner produces, the scorers consume, and the UI renders. Learn these types and the contracts between every later layer become obvious.",
+      "nodeIds": [
+        "file:shared/types.ts"
+      ],
+      "languageLesson": "TypeScript interfaces define structural contracts with zero runtime cost: a value is accepted anywhere as long as its shape matches, which is why one types.ts can act as the lingua franca for the scanner, scorers, and React surfaces without any of them importing each other."
+    },
+    {
+      "order": 4,
+      "title": "Platform Profiles",
+      "description": "The second-most-referenced module classifies a page as an owned store versus a marketplace and supplies per-platform optimization profiles. Every scoring module imports getPlatformProfile so its checks and bonuses adapt to context, the same page is graded differently on a Shopify store than on a marketplace listing. This is the branching backbone that the SEO/GEO/AEO scorers all lean on.",
+      "nodeIds": [
+        "file:shared/platformOptimization.ts"
+      ]
+    },
+    {
+      "order": 5,
+      "title": "Scraping the Page",
+      "description": "Before anything can be scored, a raw page must become structured data. pageScanner.ts is the DOM-scraping engine: it walks a product page document and extracts title, meta, description, FAQ, price, rating, schema types, and image alt text into the ProductSnapshot type from Step 3. This is the single input that feeds the entire scoring pipeline.",
+      "nodeIds": [
+        "file:shared/pageScanner.ts"
+      ]
+    },
+    {
+      "order": 6,
+      "title": "Scoring Primitives",
+      "description": "scoringUtils.ts holds the small shared building blocks every scorer reuses: band classification from a numeric score, score clamping and rounding, and case-insensitive keyword matching. Pulling these into one place (5 incoming references each) keeps the three scorers consistent, a score of 82 means the same band whether it came from the SEO, GEO, or AEO engine.",
+      "nodeIds": [
+        "file:shared/scoringUtils.ts"
+      ]
+    },
+    {
+      "order": 7,
+      "title": "The Three Scoring Engines",
+      "description": "This is the heart of the product: three parallel scorers that each take a ProductSnapshot plus a platform profile and emit a banded score with reasons and prioritized fixes. seoScoring checks classic signals (title, description, headings, alt text, schema); geoScoring evaluates LLM-citation readiness; aeoScoring inspects FAQ and answer-friendly phrasing. They share the Step 4 profiles and Step 6 primitives but stay independent so each visibility lens can evolve on its own.",
+      "nodeIds": [
+        "file:shared/seoScoring.ts",
+        "file:shared/geoScoring.ts",
+        "file:shared/aeoScoring.ts"
+      ]
+    },
+    {
+      "order": 8,
+      "title": "Assembling the Report",
+      "description": "report.ts is the aggregator that turns three independent scores into one product. It runs the SEO, GEO, and AEO scorers from Step 7 over a snapshot and bundles the results, then checklist.ts attaches a platform-aware pre-publish checklist flagging missing title, description, schema, alt text, and GEO/AEO coverage. The single VisibilityReport produced here is what both UIs ultimately render.",
+      "nodeIds": [
+        "file:shared/report.ts",
+        "file:shared/checklist.ts"
+      ]
+    },
+    {
+      "order": 9,
+      "title": "Turning Scores into Fixes",
+      "description": "Scores alone do not help a merchant, so this cluster generates the actionable output. fixCards translates failed checklist items into beginner-friendly Claude prompt tasks; promptTemplates serializes the snapshot and evidence into copy-paste LLM fix prompts; fixOutput produces ready-to-paste content packs (titles, descriptions, FAQ, trust and comparison blocks); and outputChecker validates draft copy by flagging empty output, robotic AI boilerplate, and missing keywords. Together they close the loop from diagnosis to publishable text.",
+      "nodeIds": [
+        "file:shared/fixCards.ts",
+        "file:shared/promptTemplates.ts",
+        "file:shared/fixOutput.ts",
+        "file:shared/outputChecker.ts"
+      ]
+    },
+    {
+      "order": 10,
+      "title": "Saving Reports",
+      "description": "savedReports.ts is the persistence layer that lets merchants keep a history of scans. It reads and writes owner-scoped report snapshots to localStorage with a safe-storage fallback, building summary metadata each time a snapshot is saved. It sits between the core engine and the surfaces, both the web app and the extension call it to remember past results.",
+      "nodeIds": [
+        "file:shared/savedReports.ts"
+      ],
+      "languageLesson": "Browser localStorage is synchronous and can throw (quota or privacy modes), so a safe-storage fallback wraps access in try/catch and degrades to an in-memory store, a common pattern for client-only persistence with no backend."
+    },
+    {
+      "order": 11,
+      "title": "The Web App Surface",
+      "description": "The first of two delivery surfaces consumes the entire shared engine from Steps 3-10. App.tsx is the merchant workspace: login and session handling, snapshot editing, visibility report rendering, fix cards, saved reports, and output validation. main.tsx mounts it into the DOM and loads the global stylesheet, while index.html is the HTML shell that bootstraps the whole React app.",
+      "nodeIds": [
+        "file:web/src/App.tsx",
+        "file:web/src/main.tsx",
+        "file:index.html"
+      ],
+      "languageLesson": "A React entry point is intentionally tiny: main.tsx only calls createRoot(...).render(<App/>). All real logic lives in components, so the index.html -> main.tsx -> App.tsx chain is a thin bootstrap that hands control to the component tree."
+    },
+    {
+      "order": 12,
+      "title": "The Chrome Extension Surface",
+      "description": "The second surface reuses the same core engine but runs live inside the browser. sidepanel.tsx scrapes the active product tab, builds a visibility report, and renders scores, fix cards, and copyable prompts; background.ts is a tiny Manifest V3 service worker that opens the side panel when the toolbar icon is clicked; and manifest.json declares the side panel UI, the background worker, the action button, and host permissions. This is the in-context version of the Step 11 workspace.",
+      "nodeIds": [
+        "file:extension/src/sidepanel.tsx",
+        "file:extension/src/background.ts",
+        "config:extension/manifest.json"
+      ],
+      "languageLesson": "Chrome Manifest V3 replaces persistent background pages with event-driven service workers that spin up on demand and idle out. background.ts here does almost nothing but register a click handler, the side panel holds the UI, which keeps the worker lightweight."
+    },
+    {
+      "order": 13,
+      "title": "Build, Test & Ship",
+      "description": "The capstone shows how the codebase is built and verified. vite.config.ts defines three entry points (web app, side panel, background) plus a plugin that copies the extension manifest and icons into dist; package.json wires up the React/Vite/Vitest toolchain and the dev/build/test/package scripts. The Vitest suite (scoring.test.ts and friends) locks down the core scoring, checklist, and output modules, and INSTALL.md plus VERSION.md document how to run the web app, load the extension, and track releases.",
+      "nodeIds": [
+        "file:vite.config.ts",
+        "config:package.json",
+        "file:tests/scoring.test.ts",
+        "document:INSTALL.md",
+        "document:VERSION.md"
+      ],
+      "languageLesson": "Vite uses Rollup-style multi-entry builds: each named input (web, sidepanel, background) becomes its own bundle, which is exactly what a project shipping both an SPA and a Chrome extension from one source tree needs."
+    }
+  ]
+}
