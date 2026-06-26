@@ -24,5 +24,7 @@
     "typescript": "^5.9.3",
     "vite": "^5.4.21",
     "vitest": "^1.6.1"
-  }
+  },
+  "description": "Chrome extension + web app that scans ecommerce product pages and turns SEO/GEO/AEO gaps into ready-to-paste Claude and Codex tasks.",
+  "license": "MIT"
 }
