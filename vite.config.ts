@@ -24,6 +24,7 @@ function copyExtensionManifest() {
 }
 
 export default defineConfig({
+  base: "./", // relative paths so the same build runs as a Chrome extension AND on GitHub Pages
   plugins: [react(), copyExtensionManifest()],
   build: {
     outDir: "dist",
