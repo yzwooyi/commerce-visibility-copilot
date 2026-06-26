@@ -1,5 +1,8 @@
 # Commerce Visibility Copilot
 
+[![CI](https://github.com/yzwooyi/commerce-visibility-copilot/actions/workflows/ci.yml/badge.svg)](https://github.com/yzwooyi/commerce-visibility-copilot/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 A Chrome extension + web app that scans an ecommerce product page, scores it for
 **SEO, GEO (generative-engine optimization), and AEO (answer-engine optimization)**,
 and turns the gaps into ready-to-paste **tasks for Claude and Codex** — then checks
