@@ -10,6 +10,8 @@ the AI's output before you publish.
 
 > Scan → Score → Fix with Claude/Codex → Check → Publish
 
+**▶ Live demo:** https://yzwooyi.github.io/commerce-visibility-copilot/ — try the demo workspace, no install needed.
+
 It is not another AI chat product. It is a guided operating layer for ecommerce
 sellers who already have Claude/Codex but don't know *what to ask* or *whether the
 output is good enough*.
