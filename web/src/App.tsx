@@ -199,7 +199,7 @@ export default function App() {
           <div className="install-actions">
             <a
               className="primary-button hero-primary"
-              href="/downloads/commerce-visibility-copilot-extension.zip"
+              href="downloads/commerce-visibility-copilot-extension.zip"
               download
             >
               <Chrome size={17} />
